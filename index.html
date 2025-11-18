@@ -1,0 +1,2865 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HLA2106 Unit 23 - Presenting Arguments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            padding: 40px;
+            min-height: 500px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Landing Page */
+        .landing {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            padding: 60px 40px;
+        }
+
+        .emoji-float {
+            display: flex;
+            gap: 20px;
+            font-size: 4rem;
+            margin-bottom: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .emoji-float span:nth-child(1) { animation-delay: 0s; }
+        .emoji-float span:nth-child(2) { animation-delay: 0.2s; }
+        .emoji-float span:nth-child(3) { animation-delay: 0.4s; }
+        .emoji-float span:nth-child(4) { animation-delay: 0.6s; }
+
+        .landing h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .landing h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .step-indicators {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #999;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        .step.active .step-circle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step.completed .step-circle {
+            background: #28a745;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .step-line {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            right: -50%;
+            height: 3px;
+            background: #ddd;
+            z-index: 1;
+        }
+
+        .step:last-child .step-line {
+            display: none;
+        }
+
+        .step.completed .step-line {
+            background: #28a745;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header .topic {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9ff;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .page-header .stance {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .stance.preferable {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stance.not-preferable {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Sentence Builder */
+        .sentence-builder {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .point-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .point-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .point-header.pro {
+            color: #28a745;
+        }
+
+        .point-header.con {
+            color: #dc3545;
+        }
+
+        .point-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            padding-left: 35px;
+        }
+
+        .builder-step {
+            margin-bottom: 20px;
+        }
+
+        .builder-step-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        select {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 150px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        select:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .sentence-preview {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #856404;
+        }
+
+        .sentence-preview.correct {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .sentence-preview.incorrect {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* Paragraph Builder */
+        .paragraph-builder {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .instruction-box p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .instruction-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .instruction-box strong {
+            color: #667eea;
+        }
+
+        .template-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .template-line {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .template-line.intro {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 300px;
+            padding: 8px 15px;
+            background: #f0f4ff;
+            border: 2px dashed #667eea;
+            border-radius: 6px;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .fill-blank.filled {
+            background: #d4edda;
+            border-color: #28a745;
+            border-style: solid;
+            color: #155724;
+            font-style: normal;
+        }
+
+        .connective-select {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .connective-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+
+        .connective-info strong {
+            color: #856404;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            animation: slideDown 0.5s ease;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Summary Page */
+        .summary-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .summary-box h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .summary-item {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .summary-item.strength {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .summary-item.weakness {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Completion Page */
+        .completion {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .celebration {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .completion h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .completion p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .page {
+                padding: 20px;
+            }
+
+            .landing h1 {
+                font-size: 1.8rem;
+            }
+
+            .landing h2 {
+                font-size: 1.3rem;
+            }
+
+            .emoji-float {
+                font-size: 3rem;
+                gap: 10px;
+            }
+
+            .step-indicators {
+                padding: 0 10px;
+            }
+
+            .step-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .step-label {
+                font-size: 0.65rem;
+            }
+
+            .page-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .page-header .topic {
+                font-size: 1.1rem;
+                padding: 12px 20px;
+            }
+
+            .sentence-builder,
+            .paragraph-builder {
+                padding: 20px;
+            }
+
+            .point-card {
+                padding: 20px;
+            }
+
+            select {
+                min-width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .dropdown-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .fill-blank {
+                min-width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            .celebration {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing h1 {
+                font-size: 1.5rem;
+            }
+
+            .emoji-float {
+                font-size: 2.5rem;
+            }
+
+            .step-label {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1: Landing -->
+        <div class="page active" id="page1">
+            <div class="landing">
+                <div class="emoji-float">
+                    <span>👔</span>
+                    <span>🧺</span>
+                    <span>👕</span>
+                    <span>🎨</span>
+                </div>
+                <h1>HLA2106: Workplace Writing II</h1>
+                <h2>Unit 23: Presenting Arguments</h2>
+                <p>Learn to present arguments step by step!<br>Master modal verbs, sentence structure, and connectives.</p>
+                <button class="start-btn" onclick="goToPage(2)">Start Learning 🚀</button>
+            </div>
+        </div>
+
+        <!-- Page 2: Q1 Step 1 - Build Sentences -->
+        <div class="page" id="page2">
+            <div class="progress-container">
+                <div class="progress-text">Question 1 of 4 - Step 1: Build Sentences</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 6.25%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 1 of 4</h2>
+                <div class="topic">👔 Introducing new staff uniforms</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="sentence-builder">
+                <!-- PRO Point -->
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>😊 PRO</span>
+                    </div>
+                    <div class="point-text">make staff look more professional</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q1_pro_modal" onchange="updateQ1ProPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q1_pro_subject" onchange="updateQ1ProPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="The new uniform">The new uniform</option>
+                            <option value="It">It</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q1_pro_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <!-- CON Point -->
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>😟 CON</span>
+                    </div>
+                    <div class="point-text">incur high costs</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q1_con_modal" onchange="updateQ1ConPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q1_con_subject" onchange="updateQ1ConPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="The new uniform">The new uniform</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q1_con_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="q1_step1_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
+                <button class="btn btn-primary" id="q1_step1_next" onclick="checkQ1Step1()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 3: Q1 Step 2 - Connect Ideas -->
+        <div class="page" id="page3">
+            <div class="progress-container">
+                <div class="progress-text">Question 1 of 4 - Step 2: Connect Ideas</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 12.5%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 1 of 4</h2>
+                <div class="topic">👔 Introducing new staff uniforms</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="paragraph-builder">
+                <div class="instruction-box">
+                    <p><strong>Since this option is NOT PREFERABLE, emphasise the CON.</strong></p>
+                    <p>You can use: <strong>however</strong> or <strong>but</strong></p>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>Your sentences:</strong></p>
+                    <p style="color: #333; margin-top: 10px;">
+                        <strong>PRO:</strong> <span id="q1_step2_pro_display"></span><br>
+                        <strong>CON:</strong> <span id="q1_step2_con_display"></span>
+                    </p>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-line intro">
+                        Introducing new staff uniforms is not preferable.
+                    </div>
+                    
+                    <div class="builder-step">
+                        <div class="builder-step-label">Which sentence comes first?</div>
+                        <select id="q1_first_sentence" onchange="updateQ1OrderPreview()">
+                            <option value="">-- Select sentence --</option>
+                            <option value="pro">PRO sentence</option>
+                            <option value="con">CON sentence</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose your connective</div>
+                        <select id="q1_connective" onchange="updateQ1OrderPreview()">
+                            <option value="">-- Select connective --</option>
+                            <option value="However">However</option>
+                            <option value="But">But</option>
+                        </select>
+                    </div>
+
+                    <div class="template-line" style="margin-top: 20px;">
+                        <span class="fill-blank" id="q1_first_blank">Select first sentence...</span>
+                    </div>
+                    
+                    <div class="template-line">
+                        <span class="fill-blank" id="q1_connective_blank">...</span>, <span class="fill-blank" id="q1_second_blank">...</span>
+                    </div>
+
+                    <div class="connective-info">
+                        <strong>💡 Connective Guide:</strong><br>
+                        • <strong>However</strong> = starts a new sentence (formal)<br>
+                        • <strong>But</strong> = continues the same sentence (less formal)
+                    </div>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>💡 Tip:</strong> To emphasise the CON, put it AFTER the connective</p>
+                </div>
+            </div>
+
+            <div class="feedback" id="q1_step2_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+                <button class="btn btn-primary" id="q1_step2_next" onclick="checkQ1Step2()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+        <!-- Page 4: Q2 Step 1 - Build Sentences -->
+        <div class="page" id="page4">
+            <div class="progress-container">
+                <div class="progress-text">Question 2 of 4 - Step 1: Build Sentences</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 2 of 4</h2>
+                <div class="topic">🧺 Providing uniform laundry service</div>
+                <div class="stance preferable">Given stance: PREFERABLE ✅</div>
+            </div>
+
+            <div class="sentence-builder">
+                <!-- PRO Point -->
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>👍 PRO</span>
+                    </div>
+                    <div class="point-text">ensure uniforms are clean and hygienic</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q2_pro_modal" onchange="updateQ2ProPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q2_pro_subject" onchange="updateQ2ProPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="The service">The service</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q2_pro_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <!-- CON Point -->
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>👎 CON</span>
+                    </div>
+                    <div class="point-text">need to outsource service</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q2_con_modal" onchange="updateQ2ConPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q2_con_subject" onchange="updateQ2ConPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="We">We</option>
+                            <option value="The hotel">The hotel</option>
+                            <option value="It">It</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q2_con_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="q2_step1_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(3)">← Back</button>
+                <button class="btn btn-primary" id="q2_step1_next" onclick="checkQ2Step1()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 5: Q2 Step 2 - Connect with Although/Though/Even though -->
+        <div class="page" id="page5">
+            <div class="progress-container">
+                <div class="progress-text">Question 2 of 4 - Step 2: Connect Ideas</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 31.25%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 2 of 4</h2>
+                <div class="topic">🧺 Providing uniform laundry service</div>
+                <div class="stance preferable">Given stance: PREFERABLE ✅</div>
+            </div>
+
+            <div class="paragraph-builder">
+                <div class="instruction-box">
+                    <p><strong>Since this option is PREFERABLE, emphasise the PRO.</strong></p>
+                    <p>You can use: <strong>although</strong>, <strong>though</strong>, or <strong>even though</strong></p>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>Your sentences:</strong></p>
+                    <p style="color: #333; margin-top: 10px;">
+                        <strong>PRO:</strong> <span id="q2_step2_pro_display"></span><br>
+                        <strong>CON:</strong> <span id="q2_step2_con_display"></span>
+                    </p>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-line intro">
+                        Providing uniform laundry service is preferable.
+                    </div>
+                    
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose your connective</div>
+                        <select id="q2_connective" onchange="updateQ2OrderPreview()">
+                            <option value="">-- Select connective --</option>
+                            <option value="Although">Although</option>
+                            <option value="Though">Though</option>
+                            <option value="Even though">Even though</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Which sentence comes after the connective?</div>
+                        <select id="q2_first_sentence" onchange="updateQ2OrderPreview()">
+                            <option value="">-- Select sentence --</option>
+                            <option value="pro">PRO sentence</option>
+                            <option value="con">CON sentence</option>
+                        </select>
+                    </div>
+
+                    <div class="template-line" style="margin-top: 20px;">
+                        <span class="fill-blank" id="q2_connective_blank">...</span> <span class="fill-blank" id="q2_first_blank">select connective and sentence...</span>,
+                    </div>
+                    
+                    <div class="template-line">
+                        <span class="fill-blank" id="q2_second_blank">...</span>
+                    </div>
+
+                    <div class="connective-info">
+                        <strong>💡 Connective Guide:</strong><br>
+                        • <strong>Although</strong> = formal, introduces contrasting clause<br>
+                        • <strong>Though</strong> = less formal than "although"<br>
+                        • <strong>Even though</strong> = emphasises the contrast more
+                    </div>
+                </div>
+
+                <div class="instruction-box" style="background: #d4edda; border-left-color: #28a745;">
+                    <p style="color: #155724;"><strong>💡 Tip:</strong> To emphasise the PRO, put it LAST (after the CON)</p>
+                </div>
+            </div>
+
+            <div class="feedback" id="q2_step2_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(4)">← Back</button>
+                <button class="btn btn-primary" id="q2_step2_next" onclick="checkQ2Step2()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 6: Q3 Step 1 - Build Sentences -->
+        <div class="page" id="page6">
+            <div class="progress-container">
+                <div class="progress-text">Question 3 of 4 - Step 1: Build Sentences</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 43.75%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 3 of 4</h2>
+                <div class="topic">👕 Allowing casual dress on Fridays</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="sentence-builder">
+                <!-- PRO Point -->
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>👍 PRO</span>
+                    </div>
+                    <div class="point-text">boost staff morale</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q3_pro_modal" onchange="updateQ3ProPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q3_pro_subject" onchange="updateQ3ProPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="This policy">This policy</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q3_pro_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <!-- CON Point -->
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>👎 CON</span>
+                    </div>
+                    <div class="point-text">affect professional image</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q3_con_modal" onchange="updateQ3ConPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q3_con_subject" onchange="updateQ3ConPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="This policy">This policy</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q3_con_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="q3_step1_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(5)">← Back</button>
+                <button class="btn btn-primary" id="q3_step1_next" onclick="checkQ3Step1()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 7: Q3 Step 2 - Connect Ideas -->
+        <div class="page" id="page7">
+            <div class="progress-container">
+                <div class="progress-text">Question 3 of 4 - Step 2: Connect Ideas</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 3 of 4</h2>
+                <div class="topic">👕 Allowing casual dress on Fridays</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="paragraph-builder">
+                <div class="instruction-box">
+                    <p><strong>Since this option is NOT PREFERABLE, emphasise the CON.</strong></p>
+                    <p>You can use: <strong>however</strong> or <strong>but</strong></p>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>Your sentences:</strong></p>
+                    <p style="color: #333; margin-top: 10px;">
+                        <strong>PRO:</strong> <span id="q3_step2_pro_display"></span><br>
+                        <strong>CON:</strong> <span id="q3_step2_con_display"></span>
+                    </p>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-line intro">
+                        My preference would not be for allowing casual dress on Fridays.
+                    </div>
+                    
+                    <div class="builder-step">
+                        <div class="builder-step-label">Which sentence comes first?</div>
+                        <select id="q3_first_sentence" onchange="updateQ3OrderPreview()">
+                            <option value="">-- Select sentence --</option>
+                            <option value="pro">PRO sentence</option>
+                            <option value="con">CON sentence</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose your connective</div>
+                        <select id="q3_connective" onchange="updateQ3OrderPreview()">
+                            <option value="">-- Select connective --</option>
+                            <option value="However">However</option>
+                            <option value="But">But</option>
+                        </select>
+                    </div>
+
+                    <div class="template-line" style="margin-top: 20px;">
+                        <span class="fill-blank" id="q3_first_blank">Select first sentence...</span>
+                    </div>
+                    
+                    <div class="template-line">
+                        <span class="fill-blank" id="q3_connective_blank">...</span>, <span class="fill-blank" id="q3_second_blank">...</span>
+                    </div>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>💡 Tip:</strong> Notice the different opening: "My preference would not be for..."</p>
+                </div>
+            </div>
+
+            <div class="feedback" id="q3_step2_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
+                <button class="btn btn-primary" id="q3_step2_next" onclick="checkQ3Step2()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 8: Q4 Step 1 - Build Sentences -->
+        <div class="page" id="page8">
+            <div class="progress-container">
+                <div class="progress-text">Question 4 of 4 - Step 1: Build Sentences</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 62.5%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 4 of 4</h2>
+                <div class="topic">🎨 Allowing staff to customise uniform accessories</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="sentence-builder">
+                <!-- PRO Point -->
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>👍 PRO</span>
+                    </div>
+                    <div class="point-text">improve staff satisfaction</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q4_pro_modal" onchange="updateQ4ProPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q4_pro_subject" onchange="updateQ4ProPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="This policy">This policy</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q4_pro_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <!-- CON Point -->
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>👎 CON</span>
+                    </div>
+                    <div class="point-text">need clear guidelines</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="q4_con_modal" onchange="updateQ4ConPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="q4_con_subject" onchange="updateQ4ConPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="We">We</option>
+                            <option value="The hotel">The hotel</option>
+                            <option value="It">It</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="q4_con_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="q4_step1_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
+                <button class="btn btn-primary" id="q4_step1_next" onclick="checkQ4Step1()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 9: Q4 Step 2 - Connect Ideas -->
+        <div class="page" id="page9">
+            <div class="progress-container">
+                <div class="progress-text">Question 4 of 4 - Step 2: Connect Ideas</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 68.75%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step completed">
+                    <div class="step-circle">✓</div>
+                    <div class="step-label">Build Sentences</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Connect Ideas</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>Question 4 of 4</h2>
+                <div class="topic">🎨 Allowing staff to customise uniform accessories</div>
+                <div class="stance not-preferable">Given stance: NOT PREFERABLE ❌</div>
+            </div>
+
+            <div class="paragraph-builder">
+                <div class="instruction-box">
+                    <p><strong>Since this option is NOT PREFERABLE, emphasise the CON.</strong></p>
+                    <p>You can use: <strong>although</strong>, <strong>though</strong>, or <strong>even though</strong></p>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>Your sentences:</strong></p>
+                    <p style="color: #333; margin-top: 10px;">
+                        <strong>PRO:</strong> <span id="q4_step2_pro_display"></span><br>
+                        <strong>CON:</strong> <span id="q4_step2_con_display"></span>
+                    </p>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-line intro">
+                        I would not prefer allowing staff to customise uniform accessories.
+                    </div>
+                    
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose your connective</div>
+                        <select id="q4_connective" onchange="updateQ4OrderPreview()">
+                            <option value="">-- Select connective --</option>
+                            <option value="Although">Although</option>
+                            <option value="Though">Though</option>
+                            <option value="Even though">Even though</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Which sentence comes after the connective?</div>
+                        <select id="q4_first_sentence" onchange="updateQ4OrderPreview()">
+                            <option value="">-- Select sentence --</option>
+                            <option value="pro">PRO sentence</option>
+                            <option value="con">CON sentence</option>
+                        </select>
+                    </div>
+
+                    <div class="template-line" style="margin-top: 20px;">
+                        <span class="fill-blank" id="q4_connective_blank">...</span> <span class="fill-blank" id="q4_first_blank">select connective and sentence...</span>,
+                    </div>
+                    
+                    <div class="template-line">
+                        <span class="fill-blank" id="q4_second_blank">...</span>
+                    </div>
+                </div>
+
+                <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <p style="color: #856404;"><strong>💡 Tip:</strong> Put the CON LAST to emphasise why it's NOT preferable.</p>
+                </div>
+            </div>
+
+            <div class="feedback" id="q4_step2_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+                <button class="btn btn-primary" id="q4_step2_next" onclick="checkQ4Step2()" disabled>Check & Continue →</button>
+            </div>
+        </div>
+        <!-- Page 10: Learning Summary -->
+        <div class="page" id="page10">
+            <div class="progress-container">
+                <div class="progress-text">Learning Summary</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>📊 Your Learning Summary</h2>
+            </div>
+
+            <div class="score-display">
+                <div class="score-circle" id="score-display">--</div>
+                <p style="font-size: 1.2rem; color: #667eea; font-weight: bold;">Modal Verb Accuracy</p>
+            </div>
+
+            <div class="summary-box">
+                <h3>✅ Strengths</h3>
+                <div id="strengths-container">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <div class="summary-box">
+                <h3>⚠️ Areas to Improve</h3>
+                <div id="weaknesses-container">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+
+            <div class="summary-box" style="background: #e7f3ff;">
+                <h3>💡 Key Takeaways</h3>
+                <div class="summary-item">
+                    <p><strong>✓ NOT PREFERABLE:</strong> Emphasise CON using "however/but" or place CON after "although/though/even though"</p>
+                </div>
+                <div class="summary-item">
+                    <p><strong>✓ PREFERABLE:</strong> Emphasise PRO by placing it after "although/though/even though"</p>
+                </div>
+                <div class="summary-item">
+                    <p><strong>✓ Modal verbs:</strong> "can" (ability/possibility), "may" (possibility), "will" (certainty)</p>
+                </div>
+                <div class="summary-item">
+                    <p><strong>✓ Connectives:</strong> Although/Though/Even though (contrast), However/But (opposition)</p>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(9)">← Back</button>
+                <button class="btn btn-primary" onclick="goToPage(11)">Challenge Yourself! 🚀</button>
+            </div>
+        </div>
+
+        <!-- Page 11: Challenge - Choose Topic -->
+        <div class="page" id="page11">
+            <div class="progress-container">
+                <div class="progress-text">Challenge: Choose Your Topic</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>🌟 Challenge Yourself!</h2>
+                <p style="margin-top: 15px; font-size: 1.1rem; color: #666;">
+                    Now YOU decide if you prefer the option or not!
+                </p>
+            </div>
+
+            <div class="sentence-builder">
+                <div class="instruction-box">
+                    <p><strong>Pick ONE topic to present your argument:</strong></p>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectTopic('air purifiers')">
+                    <input type="radio" name="challenge-topic" value="air purifiers" id="topic1" style="margin-right: 10px;">
+                    <label for="topic1" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>💨 Installing air purifiers in offices</strong>
+                    </label>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectTopic('5-day work')">
+                    <input type="radio" name="challenge-topic" value="5-day work" id="topic2" style="margin-right: 10px;">
+                    <label for="topic2" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>📅 Implementing 5-day work arrangement</strong>
+                    </label>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectTopic('wellness program')">
+                    <input type="radio" name="challenge-topic" value="wellness program" id="topic3" style="margin-right: 10px;">
+                    <label for="topic3" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>🏃 Setting up staff wellness programme</strong>
+                    </label>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectTopic('flexible hours')">
+                    <input type="radio" name="challenge-topic" value="flexible hours" id="topic4" style="margin-right: 10px;">
+                    <label for="topic4" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>🕐 Introducing flexible work hours</strong>
+                    </label>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(10)">← Back</button>
+                <button class="btn btn-primary" id="topic-select-btn" onclick="goToChallenge()" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 12: Challenge - Choose Stance -->
+        <div class="page" id="page12">
+            <div class="progress-container">
+                <div class="progress-text">Challenge: Choose Your Stance</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>🤔 What's Your Opinion?</h2>
+                <div class="topic" id="challenge-topic-display">💨 Installing air purifiers in offices</div>
+            </div>
+
+            <div class="sentence-builder">
+                <div class="instruction-box" style="background: #e7f3ff;">
+                    <p><strong>Here are the PROs and CONs:</strong></p>
+                </div>
+
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>👍 PRO</span>
+                    </div>
+                    <div class="point-text" id="challenge-pro-text">improve air quality</div>
+                </div>
+
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>👎 CON</span>
+                    </div>
+                    <div class="point-text" id="challenge-con-text">high maintenance costs</div>
+                </div>
+
+                <div class="instruction-box">
+                    <p><strong>Do YOU prefer this option?</strong></p>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectStance('preferable')">
+                    <input type="radio" name="challenge-stance" value="preferable" id="stance1" style="margin-right: 10px;">
+                    <label for="stance1" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>✅ Yes, I prefer it</strong> (emphasise PRO)
+                    </label>
+                </div>
+
+                <div class="point-card" style="cursor: pointer;" onclick="selectStance('not-preferable')">
+                    <input type="radio" name="challenge-stance" value="not-preferable" id="stance2" style="margin-right: 10px;">
+                    <label for="stance2" style="cursor: pointer; font-size: 1.1rem;">
+                        <strong>❌ No, I don't prefer it</strong> (emphasise CON)
+                    </label>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(11)">← Back</button>
+                <button class="btn btn-primary" id="stance-select-btn" onclick="goToPage(13)" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- Page 13: Challenge - Build & Connect -->
+        <div class="page" id="page13">
+            <div class="progress-container">
+                <div class="progress-text">Challenge: Build Your Argument</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92.5%;"></div>
+                </div>
+            </div>
+
+            <div class="step-indicators">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Build & Connect</div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>🎯 Build Your Argument</h2>
+                <div class="topic" id="challenge-final-topic">💨 Installing air purifiers in offices</div>
+                <div class="stance" id="challenge-final-stance">PREFERABLE ✅</div>
+            </div>
+
+            <div class="sentence-builder">
+                <div class="instruction-box">
+                    <p><strong>Step 1: Build your sentences</strong></p>
+                </div>
+
+                <!-- PRO Point -->
+                <div class="point-card">
+                    <div class="point-header pro">
+                        <span>👍 PRO</span>
+                    </div>
+                    <div class="point-text" id="challenge-build-pro">improve air quality</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="challenge_pro_modal" onchange="updateChallengeProPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="challenge_pro_subject" onchange="updateChallengeProPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="The air purifiers">The air purifiers</option>
+                            <option value="We">We</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="challenge_pro_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <!-- CON Point -->
+                <div class="point-card">
+                    <div class="point-header con">
+                        <span>👎 CON</span>
+                    </div>
+                    <div class="point-text" id="challenge-build-con">high maintenance costs</div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 1: Choose the modal verb</div>
+                        <select id="challenge_con_modal" onchange="updateChallengeConPreview()">
+                            <option value="">-- Select modal verb --</option>
+                            <option value="can">can</option>
+                            <option value="may">may</option>
+                            <option value="will">will</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Step 2: Choose the subject</div>
+                        <select id="challenge_con_subject" onchange="updateChallengeConPreview()" disabled>
+                            <option value="">-- Select subject --</option>
+                            <option value="It">It</option>
+                            <option value="We">We</option>
+                            <option value="There">There</option>
+                        </select>
+                    </div>
+
+                    <div class="sentence-preview" id="challenge_con_preview">
+                        Select modal verb and subject to build your sentence...
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <p><strong>Step 2: Connect your ideas</strong></p>
+                </div>
+
+                <div class="template-box">
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose sentence order</div>
+                        <select id="challenge_order" onchange="updateChallengeOrderPreview()">
+                            <option value="">-- Select order --</option>
+                            <option value="pro-first">PRO first</option>
+                            <option value="con-first">CON first</option>
+                        </select>
+                    </div>
+
+                    <div class="builder-step">
+                        <div class="builder-step-label">Choose connective</div>
+                        <select id="challenge_connective" onchange="updateChallengeOrderPreview()">
+                            <option value="">-- Select connective --</option>
+                            <option value="However">However</option>
+                            <option value="But">But</option>
+                            <option value="Although">Although</option>
+                            <option value="Though">Though</option>
+                            <option value="Even though">Even though</option>
+                        </select>
+                    </div>
+
+                    <div class="template-line intro" id="challenge_intro" style="margin-top: 20px;">
+                        [Opening statement will appear here]
+                    </div>
+                    <div class="template-line">
+                        <span class="fill-blank" id="challenge_preview_line1">Build sentences and choose connective...</span>
+                    </div>
+                    <div class="template-line">
+                        <span class="fill-blank" id="challenge_preview_line2">...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feedback" id="challenge_feedback"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(12)">← Back</button>
+                <button class="btn btn-primary" id="challenge_build_btn" onclick="checkChallenge()" disabled>Submit & Review →</button>
+            </div>
+        </div>
+
+        <!-- Page 14: Challenge - Final Review -->
+        <div class="page" id="page14">
+            <div class="progress-container">
+                <div class="progress-text">Challenge: Final Review</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 96%;"></div>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2>✨ Your Final Argument</h2>
+            </div>
+
+            <div class="paragraph-builder">
+                <div class="template-box" id="challenge-final-paragraph">
+                    <!-- Dynamic content based on stance -->
+                </div>
+
+                <div class="instruction-box" style="background: #d4edda; border-left-color: #28a745;">
+                    <p style="color: #155724;"><strong>✅ Grammar check:</strong> <span id="grammar-check">All sentences are grammatically correct! ✓</span></p>
+                    <p style="color: #155724;"><strong>✅ Logic check:</strong> <span id="logic-check">Checking...</span></p>
+                    <p style="color: #155724;"><strong>✅ Structure check:</strong> <span id="structure-check">Checking...</span></p>
+                </div>
+
+                <div id="challenge-final-feedback" class="feedback"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="goToPage(13)">← Back</button>
+                <button class="btn btn-primary" onclick="goToPage(15)">See Final Results →</button>
+            </div>
+        </div>
+
+        <!-- Page 15: Completion -->
+        <div class="page" id="page15">
+            <div class="completion">
+                <div class="celebration">🎉</div>
+                <h2>Congratulations!</h2>
+                <p>You've mastered presenting arguments in workplace writing!</p>
+
+                <div class="summary-box">
+                    <h3>What You've Learnt</h3>
+                    <div class="summary-item strength">
+                        <p>✓ How to build complete sentences with modal verbs</p>
+                    </div>
+                    <div class="summary-item strength">
+                        <p>✓ How to choose appropriate subjects for different contexts</p>
+                    </div>
+                    <div class="summary-item strength">
+                        <p>✓ How to connect pros and cons using connectives</p>
+                    </div>
+                    <div class="summary-item strength">
+                        <p>✓ How to emphasise different points based on your stance</p>
+                    </div>
+                </div>
+
+                <div class="summary-box" style="background: #e7f3ff;">
+                    <h3>💡 Next Steps</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Practise writing full paragraphs using these skills in your workplace communication. Remember to consider your audience and purpose when choosing your stance and emphasis!
+                    </p>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-primary" onclick="goToPage(1)">Return to Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let studentData = {
+            q1: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
+            q2: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
+            q3: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
+            q4: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
+            challenge: { 
+                topic: '', 
+                stance: '', 
+                pro_modal: '', 
+                pro_subject: '', 
+                con_modal: '', 
+                con_subject: '',
+                pro_text: '',
+                con_text: '',
+                connective: '',
+                order: ''
+            },
+            modalAccuracy: 0,
+            totalModals: 8
+        };
+
+        // Challenge topics data
+        const challengeTopics = {
+            'air purifiers': {
+                icon: '💨',
+                title: 'Installing air purifiers in offices',
+                pro: 'improve air quality',
+                con: 'high maintenance costs',
+                pro_subjects: ['It', 'The air purifiers', 'We'],
+                con_subjects: ['It', 'We', 'There']
+            },
+            '5-day work': {
+                icon: '📅',
+                title: 'Implementing 5-day work arrangement',
+                pro: 'improve work-life balance',
+                con: 'reduce operational hours',
+                pro_subjects: ['It', 'The new arrangement', 'We'],
+                con_subjects: ['It', 'We', 'This policy']
+            },
+            'wellness program': {
+                icon: '🏃',
+                title: 'Setting up staff wellness programme',
+                pro: 'improve staff health and productivity',
+                con: 'require budget and resources',
+                pro_subjects: ['It', 'The programme', 'We'],
+                con_subjects: ['It', 'We', 'The programme']
+            },
+            'flexible hours': {
+                icon: '🕐',
+                title: 'Introducing flexible work hours',
+                pro: 'increase staff satisfaction',
+                con: 'complicate scheduling',
+                pro_subjects: ['It', 'This policy', 'We'],
+                con_subjects: ['It', 'We', 'This change']
+            }
+        };
+
+        // Navigation
+        function goToPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + pageNum).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // ============ QUESTION 1 FUNCTIONS ============
+
+        function updateQ1ProPreview() {
+            const modal = document.getElementById('q1_pro_modal').value;
+            const subject = document.getElementById('q1_pro_subject').value;
+            const preview = document.getElementById('q1_pro_preview');
+            
+            if (modal) {
+                document.getElementById('q1_pro_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} make staff look more professional.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q1.pro_modal = modal;
+                studentData.q1.pro_subject = subject;
+                checkQ1Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateQ1ConPreview() {
+            const modal = document.getElementById('q1_con_modal').value;
+            const subject = document.getElementById('q1_con_subject').value;
+            const preview = document.getElementById('q1_con_preview');
+            
+            if (modal) {
+                document.getElementById('q1_con_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} incur high costs for the hotel.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q1.con_modal = modal;
+                studentData.q1.con_subject = subject;
+                checkQ1Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function checkQ1Step1ButtonState() {
+            const btn = document.getElementById('q1_step1_next');
+            if (studentData.q1.pro_modal && studentData.q1.pro_subject && 
+                studentData.q1.con_modal && studentData.q1.con_subject) {
+                btn.disabled = false;
+            }
+        }
+
+        function checkQ1Step1() {
+            let feedback = document.getElementById('q1_step1_feedback');
+            let correct = 0;
+            let messages = [];
+            
+            // Check PRO modal (can is ideal)
+            if (studentData.q1.pro_modal === 'can') {
+                correct++;
+                messages.push('✅ "Can" is perfect for showing ability/possibility!');
+            } else if (studentData.q1.pro_modal === 'will') {
+                messages.push('⚠️ "Will" is too certain. "Can" is better for possibility.');
+            } else if (studentData.q1.pro_modal === 'may') {
+                messages.push('⚠️ "May" works but "can" is stronger for showing ability.');
+            }
+            
+            // Check CON modal (will is ideal)
+            if (studentData.q1.con_modal === 'will') {
+                correct++;
+                messages.push('✅ "Will" is perfect - costs are certain!');
+            } else if (studentData.q1.con_modal === 'may') {
+                messages.push('⚠️ "May" is uncertain. Costs are definite, so "will" is better.');
+            } else if (studentData.q1.con_modal === 'can') {
+                messages.push('⚠️ "Can" doesn\'t fit here. Use "will" for certain costs.');
+            }
+            
+            studentData.modalAccuracy += correct;
+            
+            // Show feedback
+            if (correct === 2) {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect! Moving to Step 2...</strong>';
+            } else {
+                feedback.className = 'feedback info show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good try! Moving to Step 2...</strong>';
+            }
+            
+            // Update display sentences for page 3
+            const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional.`;
+            const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel.`;
+            document.getElementById('q1_step2_pro_display').textContent = proSentence;
+            document.getElementById('q1_step2_con_display').textContent = conSentence;
+            
+            setTimeout(() => goToPage(3), 2000);
+        }
+
+        // Q1 Step 2 Functions
+        function updateQ1OrderPreview() {
+            const order = document.getElementById('q1_first_sentence').value;
+            const connective = document.getElementById('q1_connective').value;
+            const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional`;
+            const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel`;
+            
+            const firstBlank = document.getElementById('q1_first_blank');
+            const connectiveBlank = document.getElementById('q1_connective_blank');
+            const secondBlank = document.getElementById('q1_second_blank');
+            
+            if (order && connective) {
+                studentData.q1.order = order;
+                studentData.q1.connective = connective;
+                
+                if (order === 'pro') {
+                    firstBlank.textContent = proSentence + '.';
+                    connectiveBlank.textContent = connective.toLowerCase();
+                    secondBlank.textContent = conSentence;
+                } else {
+                    firstBlank.textContent = conSentence + '.';
+                    connectiveBlank.textContent = connective.toLowerCase();
+                    secondBlank.textContent = proSentence;
+                }
+                
+                firstBlank.className = 'fill-blank filled';
+                connectiveBlank.className = 'fill-blank filled';
+                secondBlank.className = 'fill-blank filled';
+                
+                document.getElementById('q1_step2_next').disabled = false;
+            }
+        }
+
+        function checkQ1Step2() {
+            const order = studentData.q1.order;
+            const connective = studentData.q1.connective;
+            const feedback = document.getElementById('q1_step2_feedback');
+            
+            // Correct: PRO first, CON after connective (to emphasise CON)
+            if (order === 'pro') {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `✅ Excellent! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
+                setTimeout(() => goToPage(4), 1500);
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = '❌ Not quite. Since it\'s NOT PREFERABLE, the CON should come AFTER the connective to emphasise it. Try again!';
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // ============ QUESTION 2 FUNCTIONS ============
+
+        function updateQ2ProPreview() {
+            const modal = document.getElementById('q2_pro_modal').value;
+            const subject = document.getElementById('q2_pro_subject').value;
+            const preview = document.getElementById('q2_pro_preview');
+            
+            if (modal) {
+                document.getElementById('q2_pro_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} ensure uniforms are always clean and hygienic.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q2.pro_modal = modal;
+                studentData.q2.pro_subject = subject;
+                checkQ2Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateQ2ConPreview() {
+            const modal = document.getElementById('q2_con_modal').value;
+            const subject = document.getElementById('q2_con_subject').value;
+            const preview = document.getElementById('q2_con_preview');
+            
+            if (modal) {
+                document.getElementById('q2_con_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} need to outsource the service.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q2.con_modal = modal;
+                studentData.q2.con_subject = subject;
+                checkQ2Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function checkQ2Step1ButtonState() {
+            const btn = document.getElementById('q2_step1_next');
+            if (studentData.q2.pro_modal && studentData.q2.pro_subject && 
+                studentData.q2.con_modal && studentData.q2.con_subject) {
+                btn.disabled = false;
+            }
+        }
+
+        function checkQ2Step1() {
+            let feedback = document.getElementById('q2_step1_feedback');
+            let correct = 0;
+            let messages = [];
+            
+            // Check PRO modal (can is ideal)
+            if (studentData.q2.pro_modal === 'can') {
+                correct++;
+                messages.push('✅ "Can" is excellent for showing what the service can do!');
+            } else if (studentData.q2.pro_modal === 'will') {
+                messages.push('⚠️ "Will" is too strong. "Can" is better for showing ability.');
+            } else if (studentData.q2.pro_modal === 'may') {
+                messages.push('⚠️ "May" is too uncertain. "Can" shows clear ability.');
+            }
+            
+            // Check CON modal (will or may acceptable, but will is better)
+            if (studentData.q2.con_modal === 'will') {
+                correct++;
+                messages.push('✅ "Will" is perfect - outsourcing is necessary!');
+            } else if (studentData.q2.con_modal === 'may') {
+                correct++;
+                messages.push('✅ "May" works - there\'s some uncertainty about outsourcing.');
+            } else if (studentData.q2.con_modal === 'can') {
+                messages.push('⚠️ "Can" doesn\'t fit. Use "will" or "may" for necessity.');
+            }
+            
+            studentData.modalAccuracy += correct;
+            
+            // Show feedback
+            if (correct === 2) {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Excellent! Moving to Step 2...</strong>';
+            } else {
+                feedback.className = 'feedback info show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good effort! Moving to Step 2...</strong>';
+            }
+            
+            // Update display sentences
+            const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic.`;
+            const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service.`;
+            document.getElementById('q2_step2_pro_display').textContent = proSentence;
+            document.getElementById('q2_step2_con_display').textContent = conSentence;
+            
+            setTimeout(() => goToPage(5), 2000);
+        }
+
+        // Q2 Step 2 Functions
+        function updateQ2OrderPreview() {
+            const connective = document.getElementById('q2_connective').value;
+            const order = document.getElementById('q2_first_sentence').value;
+            const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic`;
+            const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service`;
+            
+            const connectiveBlank = document.getElementById('q2_connective_blank');
+            const firstBlank = document.getElementById('q2_first_blank');
+            const secondBlank = document.getElementById('q2_second_blank');
+            
+            if (connective && order) {
+                studentData.q2.connective = connective;
+                studentData.q2.order = order;
+                
+                connectiveBlank.textContent = connective.toLowerCase();
+                connectiveBlank.className = 'fill-blank filled';
+                
+                if (order === 'con') {
+                    firstBlank.textContent = conSentence;
+                    secondBlank.textContent = proSentence + '.';
+                } else {
+                    firstBlank.textContent = proSentence;
+                    secondBlank.textContent = conSentence + '.';
+                }
+                
+                firstBlank.className = 'fill-blank filled';
+                secondBlank.className = 'fill-blank filled';
+                
+                document.getElementById('q2_step2_next').disabled = false;
+            }
+        }
+
+        function checkQ2Step2() {
+            const order = studentData.q2.order;
+            const connective = studentData.q2.connective;
+            const feedback = document.getElementById('q2_step2_feedback');
+            
+            // Correct: CON after connective, PRO last (to emphasise PRO)
+            if (order === 'con') {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = `✅ Excellent! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
+                setTimeout(() => goToPage(6), 1500);
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = '❌ Not quite. Since it\'s PREFERABLE, the PRO should come LAST to emphasise it. Try again!';
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // ============ QUESTION 3 FUNCTIONS ============
+
+        function updateQ3ProPreview() {
+            const modal = document.getElementById('q3_pro_modal').value;
+            const subject = document.getElementById('q3_pro_subject').value;
+            const preview = document.getElementById('q3_pro_preview');
+            
+            if (modal) {
+                document.getElementById('q3_pro_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} boost staff morale.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q3.pro_modal = modal;
+                studentData.q3.pro_subject = subject;
+                checkQ3Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateQ3ConPreview() {
+            const modal = document.getElementById('q3_con_modal').value;
+            const subject = document.getElementById('q3_con_subject').value;
+            const preview = document.getElementById('q3_con_preview');
+            
+            if (modal) {
+                document.getElementById('q3_con_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} affect our professional image negatively.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q3.con_modal = modal;
+                studentData.q3.con_subject = subject;
+                checkQ3Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function checkQ3Step1ButtonState() {
+            const btn = document.getElementById('q3_step1_next');
+            if (studentData.q3.pro_modal && studentData.q3.pro_subject && 
+                studentData.q3.con_modal && studentData.q3.con_subject) {
+                btn.disabled = false;
+            }
+        }
+
+        function checkQ3Step1() {
+            let feedback = document.getElementById('q3_step1_feedback');
+            let correct = 0;
+            let messages = [];
+            
+            // Check PRO modal (can is ideal)
+            if (studentData.q3.pro_modal === 'can') {
+                correct++;
+                messages.push('✅ "Can" is great for showing potential benefit!');
+            } else if (studentData.q3.pro_modal === 'will') {
+                messages.push('⚠️ "Will" is too certain. "Can" is better for possibility.');
+            } else if (studentData.q3.pro_modal === 'may') {
+                messages.push('⚠️ "May" is very uncertain. "Can" shows clearer ability.');
+            }
+            
+            // Check CON modal (may is ideal - it's a possibility, not certain)
+            if (studentData.q3.con_modal === 'may') {
+                correct++;
+                messages.push('✅ "May" is perfect - the negative impact is possible, not certain!');
+            } else if (studentData.q3.con_modal === 'will') {
+                messages.push('⚠️ "Will" is too strong. The impact is only possible, so "may" is better.');
+            } else if (studentData.q3.con_modal === 'can') {
+                messages.push('⚠️ "Can" doesn\'t fit. Use "may" for possible negative impact.');
+            }
+            
+            studentData.modalAccuracy += correct;
+            
+            // Show feedback
+            if (correct === 2) {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect choices! Moving to Step 2...</strong>';
+            } else {
+                feedback.className = 'feedback info show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Keep practising! Moving to Step 2...</strong>';
+            }
+            
+            // Update display sentences
+            const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale.`;
+            const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively.`;
+            document.getElementById('q3_step2_pro_display').textContent = proSentence;
+            document.getElementById('q3_step2_con_display').textContent = conSentence;
+            
+            setTimeout(() => goToPage(7), 2000);
+        }
+
+        // Q3 Step 2 Functions
+        function updateQ3OrderPreview() {
+            const order = document.getElementById('q3_first_sentence').value;
+            const connective = document.getElementById('q3_connective').value;
+            const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale`;
+            const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively`;
+            
+            const firstBlank = document.getElementById('q3_first_blank');
+            const connectiveBlank = document.getElementById('q3_connective_blank');
+            const secondBlank = document.getElementById('q3_second_blank');
+            
+            if (order && connective) {
+                studentData.q3.order = order;
+                studentData.q3.connective = connective;
+                
+                if (order === 'pro') {
+                    firstBlank.textContent = proSentence + '.';
+                    connectiveBlank.textContent = connective.toLowerCase();
+                    secondBlank.textContent = conSentence;
+                } else {
+                    firstBlank.textContent = conSentence + '.';
+                    connectiveBlank.textContent = connective.toLowerCase();
+                    secondBlank.textContent = proSentence;
+                }
+                
+                firstBlank.className = 'fill-blank filled';
+                connectiveBlank.className = 'fill-blank filled';
+                secondBlank.className = 'fill-blank filled';
+                
+                document.getElementById('q3_step2_next').disabled = false;
+            }
+        }
+
+        function checkQ3Step2() {
+            const order = studentData.q3.order;
+            const feedback = document.getElementById('q3_step2_feedback');
+            
+            // Correct: PRO first, CON after connective
+            if (order === 'pro') {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '✅ Well done! PRO first, then CON to emphasise it!';
+                setTimeout(() => goToPage(8), 1500);
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = '❌ Try again. The CON should come after the connective to emphasise why it\'s NOT preferable.';
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // ============ QUESTION 4 FUNCTIONS ============
+
+        function updateQ4ProPreview() {
+            const modal = document.getElementById('q4_pro_modal').value;
+            const subject = document.getElementById('q4_pro_subject').value;
+            const preview = document.getElementById('q4_pro_preview');
+            
+            if (modal) {
+                document.getElementById('q4_pro_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} improve staff satisfaction.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q4.pro_modal = modal;
+                studentData.q4.pro_subject = subject;
+                checkQ4Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateQ4ConPreview() {
+            const modal = document.getElementById('q4_con_modal').value;
+            const subject = document.getElementById('q4_con_subject').value;
+            const preview = document.getElementById('q4_con_preview');
+            
+            if (modal) {
+                document.getElementById('q4_con_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} need to set clear guidelines and monitor compliance regularly.`;
+                preview.className = 'sentence-preview correct';
+                studentData.q4.con_modal = modal;
+                studentData.q4.con_subject = subject;
+                checkQ4Step1ButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function checkQ4Step1ButtonState() {
+            const btn = document.getElementById('q4_step1_next');
+            if (studentData.q4.pro_modal && studentData.q4.pro_subject && 
+                studentData.q4.con_modal && studentData.q4.con_subject) {
+                btn.disabled = false;
+            }
+        }
+
+        function checkQ4Step1() {
+            let feedback = document.getElementById('q4_step1_feedback');
+            let correct = 0;
+            let messages = [];
+            
+            // Check PRO modal (can is ideal)
+            if (studentData.q4.pro_modal === 'can') {
+                correct++;
+                messages.push('✅ "Can" is excellent for showing potential benefit!');
+            } else if (studentData.q4.pro_modal === 'will') {
+                messages.push('⚠️ "Will" is too certain. "Can" is better for showing ability.');
+            } else if (studentData.q4.pro_modal === 'may') {
+                messages.push('⚠️ "May" is uncertain. "Can" shows clearer potential.');
+            }
+            
+            // Check CON modal (will is ideal - setting guidelines is necessary/certain)
+            if (studentData.q4.con_modal === 'will') {
+                correct++;
+                messages.push('✅ "Will" is perfect - guidelines will definitely be needed!');
+            } else if (studentData.q4.con_modal === 'may') {
+                messages.push('⚠️ "May" is uncertain. Guidelines are necessary, so "will" is better.');
+            } else if (studentData.q4.con_modal === 'can') {
+                messages.push('⚠️ "Can" doesn\'t fit. Use "will" for certain necessity.');
+            }
+            
+            studentData.modalAccuracy += correct;
+            
+            // Show feedback
+            if (correct === 2) {
+                feedback.className = 'feedback success show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Outstanding! Moving to Step 2...</strong>';
+            } else {
+                feedback.className = 'feedback info show';
+                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good attempt! Moving to Step 2...</strong>';
+            }
+            
+            // Update display sentences
+            const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction.`;
+            const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly.`;
+            document.getElementById('q4_step2_pro_display').textContent = proSentence;
+            document.getElementById('q4_step2_con_display').textContent = conSentence;
+            
+            setTimeout(() => goToPage(9), 2000);
+        }
+
+        // Q4 Step 2 Functions
+        function updateQ4OrderPreview() {
+            const connective = document.getElementById('q4_connective').value;
+            const order = document.getElementById('q4_first_sentence').value;
+            const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction`;
+            const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly`;
+            
+            const connectiveBlank = document.getElementById('q4_connective_blank');
+            const firstBlank = document.getElementById('q4_first_blank');
+            const secondBlank = document.getElementById('q4_second_blank');
+            
+            if (connective && order) {
+                studentData.q4.connective = connective;
+                studentData.q4.order = order;
+                
+                connectiveBlank.textContent = connective.toLowerCase();
+                connectiveBlank.className = 'fill-blank filled';
+                
+                if (order === 'pro') {
+                    firstBlank.textContent = proSentence;
+                    secondBlank.textContent = conSentence + '.';
+                } else {
+                    firstBlank.textContent = conSentence;
+                    secondBlank.textContent = proSentence + '.';
+                }
+                
+                firstBlank.className = 'fill-blank filled';
+                secondBlank.className = 'fill-blank filled';
+                
+                document.getElementById('q4_step2_next').disabled = false;
+            }
+        }
+
+        function checkQ4Step2() {
+            const order = studentData.q4.order;
+            const feedback = document.getElementById('q4_step2_feedback');
+            
+            // Correct: PRO after connective, CON last (to emphasise CON)
+            if (order === 'pro') {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '✅ Perfect! PRO first, then CON last to emphasise why it\'s NOT preferable!';
+                setTimeout(() => goToPage(10), 1500);
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = '❌ Not quite. The CON should come LAST to emphasise why it\'s NOT preferable. Try again!';
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 3000);
+            }
+        }
+        // ============ SUMMARY PAGE FUNCTIONS ============
+
+        function loadSummary() {
+            const scoreDisplay = document.getElementById('score-display');
+            const percentage = Math.round((studentData.modalAccuracy / studentData.totalModals) * 100);
+            scoreDisplay.textContent = percentage + '%';
+
+            const strengthsContainer = document.getElementById('strengths-container');
+            const weaknessesContainer = document.getElementById('weaknesses-container');
+
+            // Strengths
+            let strengthsHTML = '';
+            if (studentData.modalAccuracy >= 6) {
+                strengthsHTML += '<div class="summary-item strength"><p>✓ Excellent modal verb selection!</p></div>';
+            }
+            strengthsHTML += '<div class="summary-item strength"><p>✓ Completed all sentence-building tasks</p></div>';
+            strengthsHTML += '<div class="summary-item strength"><p>✓ Successfully connected ideas with connectives</p></div>';
+            
+            strengthsContainer.innerHTML = strengthsHTML;
+
+            // Weaknesses
+            let weaknessesHTML = '';
+            if (studentData.modalAccuracy < 6) {
+                weaknessesHTML += '<div class="summary-item weakness"><p>⚠️ Review when to use "can" vs "may" vs "will"</p></div>';
+            }
+            if (studentData.modalAccuracy < 4) {
+                weaknessesHTML += '<div class="summary-item weakness"><p>⚠️ "Can" = ability/possibility, "May" = possibility/uncertainty, "Will" = certainty/future</p></div>';
+            }
+            if (weaknessesHTML === '') {
+                weaknessesHTML = '<div class="summary-item"><p style="color: #28a745;">🌟 No major weaknesses detected! Great job!</p></div>';
+            }
+            
+            weaknessesContainer.innerHTML = weaknessesHTML;
+        }
+
+        // ============ CHALLENGE FUNCTIONS ============
+
+        function selectTopic(topic) {
+            studentData.challenge.topic = topic;
+            document.getElementById('topic-select-btn').disabled = false;
+            
+            const radios = document.querySelectorAll('input[name="challenge-topic"]');
+            radios.forEach(radio => {
+                if (radio.value === topic) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        function goToChallenge() {
+            const topic = studentData.challenge.topic;
+            const topicData = challengeTopics[topic];
+            
+            document.getElementById('challenge-topic-display').innerHTML = 
+                `${topicData.icon} ${topicData.title}`;
+            document.getElementById('challenge-pro-text').textContent = topicData.pro;
+            document.getElementById('challenge-con-text').textContent = topicData.con;
+            
+            studentData.challenge.pro_text = topicData.pro;
+            studentData.challenge.con_text = topicData.con;
+            
+            goToPage(12);
+        }
+
+        function selectStance(stance) {
+            studentData.challenge.stance = stance;
+            document.getElementById('stance-select-btn').disabled = false;
+            
+            const radios = document.querySelectorAll('input[name="challenge-stance"]');
+            radios.forEach(radio => {
+                if (radio.value === stance) {
+                    radio.checked = true;
+                }
+            });
+        }
+
+        // Challenge Build Functions
+        function updateChallengeProPreview() {
+            const modal = document.getElementById('challenge_pro_modal').value;
+            const subject = document.getElementById('challenge_pro_subject').value;
+            const preview = document.getElementById('challenge_pro_preview');
+            
+            if (modal) {
+                document.getElementById('challenge_pro_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} ${studentData.challenge.pro_text}.`;
+                preview.className = 'sentence-preview correct';
+                studentData.challenge.pro_modal = modal;
+                studentData.challenge.pro_subject = subject;
+                checkChallengeBuildButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateChallengeConPreview() {
+            const modal = document.getElementById('challenge_con_modal').value;
+            const subject = document.getElementById('challenge_con_subject').value;
+            const preview = document.getElementById('challenge_con_preview');
+            
+            if (modal) {
+                document.getElementById('challenge_con_subject').disabled = false;
+            }
+            
+            if (modal && subject) {
+                preview.textContent = `${subject} ${modal} ${studentData.challenge.con_text}.`;
+                preview.className = 'sentence-preview correct';
+                studentData.challenge.con_modal = modal;
+                studentData.challenge.con_subject = subject;
+                checkChallengeBuildButtonState();
+            } else if (modal) {
+                preview.textContent = `Now choose the subject...`;
+                preview.className = 'sentence-preview';
+            }
+        }
+
+        function updateChallengeOrderPreview() {
+            const order = document.getElementById('challenge_order').value;
+            const connective = document.getElementById('challenge_connective').value;
+            
+            if (!studentData.challenge.pro_modal || !studentData.challenge.con_modal) {
+                return;
+            }
+            
+            const proSentence = `${studentData.challenge.pro_subject} ${studentData.challenge.pro_modal} ${studentData.challenge.pro_text}`;
+            const conSentence = `${studentData.challenge.con_subject} ${studentData.challenge.con_modal} ${studentData.challenge.con_text}`;
+            
+            const intro = document.getElementById('challenge_intro');
+            const line1 = document.getElementById('challenge_preview_line1');
+            const line2 = document.getElementById('challenge_preview_line2');
+            
+            const topic = challengeTopics[studentData.challenge.topic];
+            const stance = studentData.challenge.stance;
+            
+            if (stance === 'preferable') {
+                intro.textContent = `${topic.title} is preferable.`;
+            } else {
+                intro.textContent = `My preference would not be for ${topic.title.toLowerCase()}.`;
+            }
+            
+            if (order && connective) {
+                studentData.challenge.order = order;
+                studentData.challenge.connective = connective;
+                
+                // Check if connective is although/though/even though or however/but
+                const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
+                
+                if (isAlthoughType) {
+                    // Although-type: connective + sentence, sentence
+                    if (order === 'pro-first') {
+                        line1.textContent = `${connective} ${proSentence},`;
+                        line2.textContent = conSentence + '.';
+                    } else {
+                        line1.textContent = `${connective} ${conSentence},`;
+                        line2.textContent = proSentence + '.';
+                    }
+                } else {
+                    // However/But: sentence. Connective, sentence
+                    if (order === 'pro-first') {
+                        line1.textContent = proSentence + '.';
+                        line2.textContent = `${connective}, ${conSentence}.`;
+                    } else {
+                        line1.textContent = conSentence + '.';
+                        line2.textContent = `${connective}, ${proSentence}.`;
+                    }
+                }
+                
+                line1.className = 'fill-blank filled';
+                line2.className = 'fill-blank filled';
+                
+                checkChallengeBuildButtonState();
+            }
+        }
+
+        function checkChallengeBuildButtonState() {
+            const btn = document.getElementById('challenge_build_btn');
+            if (studentData.challenge.pro_modal && studentData.challenge.pro_subject && 
+                studentData.challenge.con_modal && studentData.challenge.con_subject &&
+                studentData.challenge.order && studentData.challenge.connective) {
+                btn.disabled = false;
+            }
+        }
+
+        function checkChallenge() {
+            const stance = studentData.challenge.stance;
+            const order = studentData.challenge.order;
+            const connective = studentData.challenge.connective;
+            const feedback = document.getElementById('challenge_feedback');
+            
+            const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
+            const isHoweverType = ['However', 'But'].includes(connective);
+            
+            let isCorrect = false;
+            let message = '';
+            
+            if (stance === 'preferable') {
+                // Should emphasise PRO (PRO comes last)
+                if (isAlthoughType && order === 'con-first') {
+                    isCorrect = true;
+                    message = `✅ Perfect! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
+                } else if (isHoweverType && order === 'pro-first') {
+                    message = `⚠️ With "${connective.toLowerCase()}", this emphasises the CON, not the PRO. Try "although/though" instead.`;
+                } else {
+                    message = '❌ Not quite right. To emphasise the PRO (since you prefer it), put PRO LAST.';
+                }
+            } else {
+                // Should emphasise CON (CON comes last)
+                if (isHoweverType && order === 'pro-first') {
+                    isCorrect = true;
+                    message = `✅ Excellent! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
+                } else if (isAlthoughType && order === 'pro-first') {
+                    isCorrect = true;
+                    message = `✅ Good! PRO after "${connective.toLowerCase()}", then CON last to emphasise it!`;
+                } else {
+                    message = '❌ Not quite right. To emphasise the CON (since you don\'t prefer it), put CON LAST.';
+                }
+            }
+            
+            if (isCorrect) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = message;
+                setTimeout(() => {
+                    displayChallengeFinal();
+                    goToPage(14);
+                }, 1500);
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = message;
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 3500);
+            }
+        }
+
+        function displayChallengeFinal() {
+            const topic = challengeTopics[studentData.challenge.topic];
+            const stance = studentData.challenge.stance;
+            const order = studentData.challenge.order;
+            const connective = studentData.challenge.connective;
+            
+            const proSentence = `${studentData.challenge.pro_subject} ${studentData.challenge.pro_modal} ${studentData.challenge.pro_text}`;
+            const conSentence = `${studentData.challenge.con_subject} ${studentData.challenge.con_modal} ${studentData.challenge.con_text}`;
+            
+            const paragraphBox = document.getElementById('challenge-final-paragraph');
+            const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
+            
+            let intro = '';
+            if (stance === 'preferable') {
+                intro = `${topic.title} is preferable.`;
+            } else {
+                intro = `My preference would not be for ${topic.title.toLowerCase()}.`;
+            }
+            
+            let paragraphHTML = `<div class="template-line intro">${intro}</div>`;
+            
+            if (isAlthoughType) {
+                if (order === 'pro-first') {
+                    paragraphHTML += `<div class="template-line">${connective} ${proSentence},</div>`;
+                    paragraphHTML += `<div class="template-line">${conSentence}.</div>`;
+                } else {
+                    paragraphHTML += `<div class="template-line">${connective} ${conSentence},</div>`;
+                    paragraphHTML += `<div class="template-line">${proSentence}.</div>`;
+                }
+            } else {
+                if (order === 'pro-first') {
+                    paragraphHTML += `<div class="template-line">${proSentence}.</div>`;
+                    paragraphHTML += `<div class="template-line">${connective}, ${conSentence}.</div>`;
+                } else {
+                    paragraphHTML += `<div class="template-line">${conSentence}.</div>`;
+                    paragraphHTML += `<div class="template-line">${connective}, ${proSentence}.</div>`;
+                }
+            }
+            
+            paragraphBox.innerHTML = paragraphHTML;
+            
+            // Checks
+            document.getElementById('logic-check').textContent = 'Stance and emphasis match! ✓';
+            document.getElementById('structure-check').textContent = 'Connective used correctly! ✓';
+            
+            const finalFeedback = document.getElementById('challenge-final-feedback');
+            finalFeedback.className = 'feedback success show';
+            finalFeedback.textContent = '🎉 Well done! You\'ve successfully created a well-structured argument!';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update page 13 when navigating to it
+            const originalGoToPage = window.goToPage;
+            window.goToPage = function(pageNum) {
+                if (pageNum === 10) {
+                    loadSummary();
+                }
+                if (pageNum === 13) {
+                    const topic = studentData.challenge.topic;
+                    const topicData = challengeTopics[topic];
+                    const stance = studentData.challenge.stance;
+                    
+                    document.getElementById('challenge-final-topic').innerHTML = 
+                        `${topicData.icon} ${topicData.title}`;
+                    
+                    const stanceElement = document.getElementById('challenge-final-stance');
+                    if (stance === 'preferable') {
+                        stanceElement.className = 'stance preferable';
+                        stanceElement.textContent = 'PREFERABLE ✅';
+                    } else {
+                        stanceElement.className = 'stance not-preferable';
+                        stanceElement.textContent = 'NOT PREFERABLE ❌';
+                    }
+                    
+                    document.getElementById('challenge-build-pro').textContent = topicData.pro;
+                    document.getElementById('challenge-build-con').textContent = topicData.con;
+                    
+                    // Update subject dropdowns
+                    const proSubjectSelect = document.getElementById('challenge_pro_subject');
+                    const conSubjectSelect = document.getElementById('challenge_con_subject');
+                    
+                    proSubjectSelect.innerHTML = '<option value="">-- Select subject --</option>';
+                    topicData.pro_subjects.forEach(subj => {
+                        proSubjectSelect.innerHTML += `<option value="${subj}">${subj}</option>`;
+                    });
+                    
+                    conSubjectSelect.innerHTML = '<option value="">-- Select subject --</option>';
+                    topicData.con_subjects.forEach(subj => {
+                        conSubjectSelect.innerHTML += `<option value="${subj}">${subj}</option>`;
+                    });
+                }
+                originalGoToPage(pageNum);
+            };
+        });
+    </script>
+</body>
+</html>
