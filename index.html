@@ -46,7 +46,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Landing Page */
         .landing {
             text-align: center;
             display: flex;
@@ -114,7 +113,6 @@
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
-        /* Progress Bar */
         .progress-container {
             margin-bottom: 30px;
         }
@@ -212,7 +210,6 @@
             background: #28a745;
         }
 
-        /* Page Header */
         .page-header {
             text-align: center;
             margin-bottom: 30px;
@@ -256,7 +253,6 @@
             color: #721c24;
         }
 
-        /* Sentence Builder */
         .sentence-builder {
             background: #f8f9fa;
             padding: 30px;
@@ -306,13 +302,6 @@
             font-size: 0.95rem;
         }
 
-        .dropdown-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
         select {
             padding: 12px 20px;
             border: 2px solid #ddd;
@@ -351,13 +340,6 @@
             color: #155724;
         }
 
-        .sentence-preview.incorrect {
-            background: #f8d7da;
-            border-left-color: #dc3545;
-            color: #721c24;
-        }
-
-        /* Paragraph Builder */
         .paragraph-builder {
             background: #f8f9fa;
             padding: 30px;
@@ -425,11 +407,6 @@
             font-style: normal;
         }
 
-        .connective-select {
-            display: inline-block;
-            margin: 0 5px;
-        }
-
         .connective-info {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -443,7 +420,6 @@
             color: #856404;
         }
 
-        /* Navigation Buttons */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -487,7 +463,6 @@
             cursor: not-allowed;
         }
 
-        /* Feedback */
         .feedback {
             margin-top: 20px;
             padding: 15px 25px;
@@ -515,18 +490,11 @@
             border: 2px solid #f5c6cb;
         }
 
-        .feedback.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 2px solid #bee5eb;
-        }
-
         @keyframes slideDown {
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Summary Page */
         .summary-box {
             background: white;
             padding: 30px;
@@ -578,7 +546,6 @@
             margin-bottom: 15px;
         }
 
-        /* Completion Page */
         .completion {
             text-align: center;
             padding: 40px 20px;
@@ -608,109 +575,26 @@
             line-height: 1.8;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .page {
-                padding: 20px;
-            }
-
-            .landing h1 {
-                font-size: 1.8rem;
-            }
-
-            .landing h2 {
-                font-size: 1.3rem;
-            }
-
-            .emoji-float {
-                font-size: 3rem;
-                gap: 10px;
-            }
-
-            .step-indicators {
-                padding: 0 10px;
-            }
-
-            .step-circle {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
-            }
-
-            .step-label {
-                font-size: 0.65rem;
-            }
-
-            .page-header h2 {
-                font-size: 1.5rem;
-            }
-
-            .page-header .topic {
-                font-size: 1.1rem;
-                padding: 12px 20px;
-            }
-
-            .sentence-builder,
-            .paragraph-builder {
-                padding: 20px;
-            }
-
-            .point-card {
-                padding: 20px;
-            }
-
-            select {
-                min-width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .dropdown-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .fill-blank {
-                min-width: 100%;
-                display: block;
-                margin: 10px 0;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                padding: 12px 30px;
-                font-size: 1rem;
-            }
-
-            .score-circle {
-                width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
-            }
-
-            .celebration {
-                font-size: 4rem;
-            }
+            body { padding: 10px; }
+            .page { padding: 20px; }
+            .landing h1 { font-size: 1.8rem; }
+            .landing h2 { font-size: 1.3rem; }
+            .emoji-float { font-size: 3rem; gap: 10px; }
+            .step-circle { width: 35px; height: 35px; font-size: 0.9rem; }
+            .step-label { font-size: 0.65rem; }
+            select { min-width: 100%; margin-bottom: 10px; }
+            .fill-blank { min-width: 100%; display: block; margin: 10px 0; }
+            .nav-buttons { flex-direction: column; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
+            .score-circle { width: 120px; height: 120px; font-size: 2.5rem; }
+            .celebration { font-size: 4rem; }
         }
 
         @media (max-width: 480px) {
-            .landing h1 {
-                font-size: 1.5rem;
-            }
-
-            .emoji-float {
-                font-size: 2.5rem;
-            }
-
-            .step-label {
-                display: none;
-            }
+            .landing h1 { font-size: 1.5rem; }
+            .emoji-float { font-size: 2.5rem; }
+            .step-label { display: none; }
         }
     </style>
 </head>
@@ -747,7 +631,7 @@
             </div>
         </div>
 
-        <!-- Page 2: Q1 Step 1 - Build Sentences -->
+        <!-- Page 2: Q1 Step 1 -->
         <div class="page" id="page2">
             <div class="progress-container">
                 <div class="progress-text">Question 1 of 4 - Step 1: Build Sentences</div>
@@ -775,10 +659,9 @@
             </div>
 
             <div class="sentence-builder">
-                <!-- PRO Point -->
                 <div class="point-card">
                     <div class="point-header pro">
-                        <span>😊 PRO</span>
+                        <span>👍 PRO</span>
                     </div>
                     <div class="point-text">make staff look more professional</div>
 
@@ -807,10 +690,9 @@
                     </div>
                 </div>
 
-                <!-- CON Point -->
                 <div class="point-card">
                     <div class="point-header con">
-                        <span>😟 CON</span>
+                        <span>👎 CON</span>
                     </div>
                     <div class="point-text">incur high costs</div>
 
@@ -848,7 +730,7 @@
             </div>
         </div>
 
-        <!-- Page 3: Q1 Step 2 - Connect Ideas -->
+        <!-- Page 3: Q1 Step 2 -->
         <div class="page" id="page3">
             <div class="progress-container">
                 <div class="progress-text">Question 1 of 4 - Step 2: Connect Ideas</div>
@@ -939,7 +821,8 @@
                 <button class="btn btn-primary" id="q1_step2_next" onclick="checkQ1Step2()" disabled>Check & Continue →</button>
             </div>
         </div>
-        <!-- Page 4: Q2 Step 1 - Build Sentences -->
+
+        <!-- Page 4: Q2 Step 1 -->
         <div class="page" id="page4">
             <div class="progress-container">
                 <div class="progress-text">Question 2 of 4 - Step 1: Build Sentences</div>
@@ -967,7 +850,6 @@
             </div>
 
             <div class="sentence-builder">
-                <!-- PRO Point -->
                 <div class="point-card">
                     <div class="point-header pro">
                         <span>👍 PRO</span>
@@ -999,7 +881,6 @@
                     </div>
                 </div>
 
-                <!-- CON Point -->
                 <div class="point-card">
                     <div class="point-header con">
                         <span>👎 CON</span>
@@ -1040,7 +921,7 @@
             </div>
         </div>
 
-        <!-- Page 5: Q2 Step 2 - Connect with Although/Though/Even though -->
+        <!-- Page 5: Q2 Step 2 -->
         <div class="page" id="page5">
             <div class="progress-container">
                 <div class="progress-text">Question 2 of 4 - Step 2: Connect Ideas</div>
@@ -1133,8 +1014,7 @@
                 <button class="btn btn-primary" id="q2_step2_next" onclick="checkQ2Step2()" disabled>Check & Continue →</button>
             </div>
         </div>
-
-        <!-- Page 6: Q3 Step 1 - Build Sentences -->
+        <!-- Page 6: Q3 Step 1 -->
         <div class="page" id="page6">
             <div class="progress-container">
                 <div class="progress-text">Question 3 of 4 - Step 1: Build Sentences</div>
@@ -1162,7 +1042,6 @@
             </div>
 
             <div class="sentence-builder">
-                <!-- PRO Point -->
                 <div class="point-card">
                     <div class="point-header pro">
                         <span>👍 PRO</span>
@@ -1194,7 +1073,6 @@
                     </div>
                 </div>
 
-                <!-- CON Point -->
                 <div class="point-card">
                     <div class="point-header con">
                         <span>👎 CON</span>
@@ -1235,7 +1113,7 @@
             </div>
         </div>
 
-        <!-- Page 7: Q3 Step 2 - Connect Ideas -->
+        <!-- Page 7: Q3 Step 2 -->
         <div class="page" id="page7">
             <div class="progress-container">
                 <div class="progress-text">Question 3 of 4 - Step 2: Connect Ideas</div>
@@ -1321,7 +1199,7 @@
             </div>
         </div>
 
-        <!-- Page 8: Q4 Step 1 - Build Sentences -->
+        <!-- Page 8: Q4 Step 1 -->
         <div class="page" id="page8">
             <div class="progress-container">
                 <div class="progress-text">Question 4 of 4 - Step 1: Build Sentences</div>
@@ -1349,7 +1227,6 @@
             </div>
 
             <div class="sentence-builder">
-                <!-- PRO Point -->
                 <div class="point-card">
                     <div class="point-header pro">
                         <span>👍 PRO</span>
@@ -1381,7 +1258,6 @@
                     </div>
                 </div>
 
-                <!-- CON Point -->
                 <div class="point-card">
                     <div class="point-header con">
                         <span>👎 CON</span>
@@ -1422,7 +1298,7 @@
             </div>
         </div>
 
-        <!-- Page 9: Q4 Step 2 - Connect Ideas -->
+        <!-- Page 9: Q4 Step 2 -->
         <div class="page" id="page9">
             <div class="progress-container">
                 <div class="progress-text">Question 4 of 4 - Step 2: Connect Ideas</div>
@@ -1508,7 +1384,8 @@
                 <button class="btn btn-primary" id="q4_step2_next" onclick="checkQ4Step2()" disabled>Check & Continue →</button>
             </div>
         </div>
-        <!-- Page 10: Learning Summary -->
+
+        <!-- Page 10: Summary -->
         <div class="page" id="page10">
             <div class="progress-container">
                 <div class="progress-text">Learning Summary</div>
@@ -1528,16 +1405,12 @@
 
             <div class="summary-box">
                 <h3>✅ Strengths</h3>
-                <div id="strengths-container">
-                    <!-- Dynamic content -->
-                </div>
+                <div id="strengths-container"></div>
             </div>
 
             <div class="summary-box">
                 <h3>⚠️ Areas to Improve</h3>
-                <div id="weaknesses-container">
-                    <!-- Dynamic content -->
-                </div>
+                <div id="weaknesses-container"></div>
             </div>
 
             <div class="summary-box" style="background: #e7f3ff;">
@@ -1562,7 +1435,7 @@
             </div>
         </div>
 
-        <!-- Page 11: Challenge - Choose Topic -->
+        <!-- Page 11: Challenge Topic -->
         <div class="page" id="page11">
             <div class="progress-container">
                 <div class="progress-text">Challenge: Choose Your Topic</div>
@@ -1618,7 +1491,7 @@
             </div>
         </div>
 
-        <!-- Page 12: Challenge - Choose Stance -->
+        <!-- Page 12: Challenge Stance -->
         <div class="page" id="page12">
             <div class="progress-container">
                 <div class="progress-text">Challenge: Choose Your Stance</div>
@@ -1675,8 +1548,7 @@
                 <button class="btn btn-primary" id="stance-select-btn" onclick="goToPage(13)" disabled>Continue →</button>
             </div>
         </div>
-
-        <!-- Page 13: Challenge - Build & Connect -->
+        <!-- Page 13: Challenge Build -->
         <div class="page" id="page13">
             <div class="progress-container">
                 <div class="progress-text">Challenge: Build Your Argument</div>
@@ -1703,7 +1575,6 @@
                     <p><strong>Step 1: Build your sentences</strong></p>
                 </div>
 
-                <!-- PRO Point -->
                 <div class="point-card">
                     <div class="point-header pro">
                         <span>👍 PRO</span>
@@ -1724,9 +1595,6 @@
                         <div class="builder-step-label">Step 2: Choose the subject</div>
                         <select id="challenge_pro_subject" onchange="updateChallengeProPreview()" disabled>
                             <option value="">-- Select subject --</option>
-                            <option value="It">It</option>
-                            <option value="The air purifiers">The air purifiers</option>
-                            <option value="We">We</option>
                         </select>
                     </div>
 
@@ -1735,7 +1603,6 @@
                     </div>
                 </div>
 
-                <!-- CON Point -->
                 <div class="point-card">
                     <div class="point-header con">
                         <span>👎 CON</span>
@@ -1756,9 +1623,6 @@
                         <div class="builder-step-label">Step 2: Choose the subject</div>
                         <select id="challenge_con_subject" onchange="updateChallengeConPreview()" disabled>
                             <option value="">-- Select subject --</option>
-                            <option value="It">It</option>
-                            <option value="We">We</option>
-                            <option value="There">There</option>
                         </select>
                     </div>
 
@@ -1813,7 +1677,7 @@
             </div>
         </div>
 
-        <!-- Page 14: Challenge - Final Review -->
+        <!-- Page 14: Challenge Review -->
         <div class="page" id="page14">
             <div class="progress-container">
                 <div class="progress-text">Challenge: Final Review</div>
@@ -1827,12 +1691,10 @@
             </div>
 
             <div class="paragraph-builder">
-                <div class="template-box" id="challenge-final-paragraph">
-                    <!-- Dynamic content based on stance -->
-                </div>
+                <div class="template-box" id="challenge-final-paragraph"></div>
 
                 <div class="instruction-box" style="background: #d4edda; border-left-color: #28a745;">
-                    <p style="color: #155724;"><strong>✅ Grammar check:</strong> <span id="grammar-check">All sentences are grammatically correct! ✓</span></p>
+                    <p style="color: #155724;"><strong>✅ Grammar check:</strong> All sentences are grammatically correct! ✓</p>
                     <p style="color: #155724;"><strong>✅ Logic check:</strong> <span id="logic-check">Checking...</span></p>
                     <p style="color: #155724;"><strong>✅ Structure check:</strong> <span id="structure-check">Checking...</span></p>
                 </div>
@@ -1884,82 +1746,58 @@
     </div>
 
     <script>
-        // Global variables
         let studentData = {
             q1: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
             q2: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
             q3: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
             q4: { pro_modal: '', pro_subject: '', con_modal: '', con_subject: '', connective: '', order: '' },
             challenge: { 
-                topic: '', 
-                stance: '', 
-                pro_modal: '', 
-                pro_subject: '', 
-                con_modal: '', 
-                con_subject: '',
-                pro_text: '',
-                con_text: '',
-                connective: '',
-                order: ''
+                topic: '', stance: '', pro_modal: '', pro_subject: '', con_modal: '', con_subject: '',
+                pro_text: '', con_text: '', connective: '', order: ''
             },
             modalAccuracy: 0,
             totalModals: 8
         };
 
-        // Challenge topics data
         const challengeTopics = {
             'air purifiers': {
-                icon: '💨',
-                title: 'Installing air purifiers in offices',
-                pro: 'improve air quality',
-                con: 'high maintenance costs',
+                icon: '💨', title: 'Installing air purifiers in offices',
+                pro: 'improve air quality', con: 'high maintenance costs',
                 pro_subjects: ['It', 'The air purifiers', 'We'],
                 con_subjects: ['It', 'We', 'There']
             },
             '5-day work': {
-                icon: '📅',
-                title: 'Implementing 5-day work arrangement',
-                pro: 'improve work-life balance',
-                con: 'reduce operational hours',
+                icon: '📅', title: 'Implementing 5-day work arrangement',
+                pro: 'improve work-life balance', con: 'reduce operational hours',
                 pro_subjects: ['It', 'The new arrangement', 'We'],
                 con_subjects: ['It', 'We', 'This policy']
             },
             'wellness program': {
-                icon: '🏃',
-                title: 'Setting up staff wellness programme',
-                pro: 'improve staff health and productivity',
-                con: 'require budget and resources',
+                icon: '🏃', title: 'Setting up staff wellness programme',
+                pro: 'improve staff health and productivity', con: 'require budget and resources',
                 pro_subjects: ['It', 'The programme', 'We'],
                 con_subjects: ['It', 'We', 'The programme']
             },
             'flexible hours': {
-                icon: '🕐',
-                title: 'Introducing flexible work hours',
-                pro: 'increase staff satisfaction',
-                con: 'complicate scheduling',
+                icon: '🕐', title: 'Introducing flexible work hours',
+                pro: 'increase staff satisfaction', con: 'complicate scheduling',
                 pro_subjects: ['It', 'This policy', 'We'],
                 con_subjects: ['It', 'We', 'This change']
             }
         };
 
-        // Navigation
         function goToPage(pageNum) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page' + pageNum).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        // ============ QUESTION 1 FUNCTIONS ============
-
+        // Q1 Functions
         function updateQ1ProPreview() {
             const modal = document.getElementById('q1_pro_modal').value;
             const subject = document.getElementById('q1_pro_subject').value;
             const preview = document.getElementById('q1_pro_preview');
-            
-            if (modal) {
-                document.getElementById('q1_pro_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q1_pro_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} make staff look more professional.`;
                 preview.className = 'sentence-preview correct';
@@ -1976,11 +1814,7 @@
             const modal = document.getElementById('q1_con_modal').value;
             const subject = document.getElementById('q1_con_subject').value;
             const preview = document.getElementById('q1_con_preview');
-            
-            if (modal) {
-                document.getElementById('q1_con_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q1_con_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} incur high costs for the hotel.`;
                 preview.className = 'sentence-preview correct';
@@ -2003,11 +1837,8 @@
 
         function checkQ1Step1() {
             let feedback = document.getElementById('q1_step1_feedback');
-            let correct = 0;
-            let hasErrors = false;
-            let messages = [];
+            let correct = 0, hasErrors = false, messages = [];
             
-            // Check PRO modal (can is ideal)
             if (studentData.q1.pro_modal === 'can') {
                 correct++;
                 messages.push('✅ "Can" is perfect for showing ability/possibility!');
@@ -2019,15 +1850,13 @@
                 messages.push('❌ PRO: "May" works but "can" is stronger. Please change it!');
             }
             
-            // Check PRO subject (The new uniform or It)
             if (studentData.q1.pro_subject === 'The new uniform' || studentData.q1.pro_subject === 'It') {
-                // Good subject
+                // Good
             } else {
                 hasErrors = true;
                 messages.push('❌ PRO: "We" doesn\'t fit here. Use "The new uniform" or "It". Please change it!');
             }
             
-            // Check CON modal (will is ideal)
             if (studentData.q1.con_modal === 'will') {
                 correct++;
                 messages.push('✅ "Will" is perfect - costs are certain!');
@@ -2039,9 +1868,8 @@
                 messages.push('❌ CON: "Can" doesn\'t fit here. Use "will" for certain costs. Please change it!');
             }
             
-            // Check CON subject (It is best)
             if (studentData.q1.con_subject === 'It') {
-                // Perfect subject
+                // Perfect
             } else {
                 hasErrors = true;
                 messages.push('❌ CON: "' + studentData.q1.con_subject + '" is less natural. Use "It". Please change it!');
@@ -2049,34 +1877,25 @@
             
             studentData.modalAccuracy += correct;
             
-            // Show feedback
             if (hasErrors) {
                 feedback.className = 'feedback error show';
                 feedback.innerHTML = messages.join('<br>');
             } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect! Moving to Step 2...</strong>';
-                
-                const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional.`;
-                const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel.`;
-                document.getElementById('q1_step2_pro_display').textContent = proSentence;
-                document.getElementById('q1_step2_con_display').textContent = conSentence;
-                
+                document.getElementById('q1_step2_pro_display').textContent = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional.`;
+                document.getElementById('q1_step2_con_display').textContent = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel.`;
                 setTimeout(() => goToPage(3), 2000);
             }
         }
 
-        // Q1 Step 2 Functions - WITH LOWERCASE FIX
         function updateQ1OrderPreview() {
             const order = document.getElementById('q1_first_sentence').value;
             const connective = document.getElementById('q1_connective').value;
             let proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional`;
             let conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel`;
-            
-            // Lowercase first letter for "but" and after "However,"
             const lowerProSentence = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
             const lowerConSentence = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
-            
             const firstBlank = document.getElementById('q1_first_blank');
             const connectiveBlank = document.getElementById('q1_connective_blank');
             const secondBlank = document.getElementById('q1_second_blank');
@@ -2085,9 +1904,7 @@
             if (order && connective) {
                 studentData.q1.order = order;
                 studentData.q1.connective = connective;
-                
                 if (connective === 'However') {
-                    // However: Sentence. However, sentence. (lowercase after comma)
                     if (order === 'pro') {
                         firstBlank.textContent = proSentence + '.';
                         connectiveBlank.textContent = ' However, ';
@@ -2098,7 +1915,6 @@
                         secondBlank.textContent = lowerProSentence + '.';
                     }
                 } else {
-                    // But: sentence, but sentence. (lowercase throughout)
                     if (order === 'pro') {
                         firstBlank.textContent = lowerProSentence;
                         connectiveBlank.textContent = ', but ';
@@ -2109,12 +1925,9 @@
                         secondBlank.textContent = lowerProSentence + '.';
                     }
                 }
-                
                 firstBlank.className = 'fill-blank filled';
                 connectiveBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
-                
-                // IMMEDIATE FEEDBACK
                 if (order === 'pro') {
                     feedback.className = 'feedback success show';
                     feedback.innerHTML = `✅ Good! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
@@ -2128,27 +1941,20 @@
         }
 
         function checkQ1Step2() {
-            const order = studentData.q1.order;
-            const feedback = document.getElementById('q1_step2_feedback');
-            
-            if (order === 'pro') {
+            if (studentData.q1.order === 'pro') {
+                const feedback = document.getElementById('q1_step2_feedback');
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = `✅ Excellent! Moving to Question 2...`;
                 setTimeout(() => goToPage(4), 1500);
             }
         }
 
-        // ============ QUESTION 2 FUNCTIONS ============
-
+        // Q2 Functions
         function updateQ2ProPreview() {
             const modal = document.getElementById('q2_pro_modal').value;
             const subject = document.getElementById('q2_pro_subject').value;
             const preview = document.getElementById('q2_pro_preview');
-            
-            if (modal) {
-                document.getElementById('q2_pro_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q2_pro_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} ensure uniforms are always clean and hygienic.`;
                 preview.className = 'sentence-preview correct';
@@ -2165,11 +1971,7 @@
             const modal = document.getElementById('q2_con_modal').value;
             const subject = document.getElementById('q2_con_subject').value;
             const preview = document.getElementById('q2_con_preview');
-            
-            if (modal) {
-                document.getElementById('q2_con_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q2_con_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} need to outsource the service.`;
                 preview.className = 'sentence-preview correct';
@@ -2192,9 +1994,7 @@
 
         function checkQ2Step1() {
             let feedback = document.getElementById('q2_step1_feedback');
-            let correct = 0;
-            let hasErrors = false;
-            let messages = [];
+            let correct = 0, hasErrors = false, messages = [];
             
             if (studentData.q2.pro_modal === 'can') {
                 correct++;
@@ -2208,7 +2008,7 @@
             }
             
             if (studentData.q2.pro_subject === 'It' || studentData.q2.pro_subject === 'The service') {
-                // Good subject
+                // Good
             } else {
                 hasErrors = true;
                 messages.push('❌ PRO: "We" is less natural here. Use "It" or "The service". Please change it!');
@@ -2226,7 +2026,7 @@
             }
             
             if (studentData.q2.con_subject === 'We') {
-                // Best subject
+                // Best
             } else {
                 hasErrors = true;
                 messages.push('❌ CON: "' + studentData.q2.con_subject + '" is less natural. Use "We". Please change it!');
@@ -2240,23 +2040,17 @@
             } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Excellent! Moving to Step 2...</strong>';
-                
-                const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic.`;
-                const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service.`;
-                document.getElementById('q2_step2_pro_display').textContent = proSentence;
-                document.getElementById('q2_step2_con_display').textContent = conSentence;
-                
+                document.getElementById('q2_step2_pro_display').textContent = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic.`;
+                document.getElementById('q2_step2_con_display').textContent = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service.`;
                 setTimeout(() => goToPage(5), 2000);
             }
         }
 
-        // Q2 Step 2 Functions
         function updateQ2OrderPreview() {
             const connective = document.getElementById('q2_connective').value;
             const order = document.getElementById('q2_first_sentence').value;
             const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic`;
             const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service`;
-            
             const connectiveBlank = document.getElementById('q2_connective_blank');
             const firstBlank = document.getElementById('q2_first_blank');
             const secondBlank = document.getElementById('q2_second_blank');
@@ -2265,8 +2059,6 @@
             if (connective && order) {
                 studentData.q2.connective = connective;
                 studentData.q2.order = order;
-                
-                // All are although-type: Connective sentence, sentence.
                 connectiveBlank.textContent = connective;
                 connectiveBlank.className = 'fill-blank filled';
                 
@@ -2281,7 +2073,6 @@
                 firstBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                // IMMEDIATE FEEDBACK
                 if (order === 'con') {
                     feedback.className = 'feedback success show';
                     feedback.innerHTML = `✅ Excellent! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
@@ -2295,27 +2086,20 @@
         }
 
         function checkQ2Step2() {
-            const order = studentData.q2.order;
-            const feedback = document.getElementById('q2_step2_feedback');
-            
-            if (order === 'con') {
+            if (studentData.q2.order === 'con') {
+                const feedback = document.getElementById('q2_step2_feedback');
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = `✅ Perfect! Moving to Question 3...`;
                 setTimeout(() => goToPage(6), 1500);
             }
         }
 
-        // ============ QUESTION 3 FUNCTIONS ============
-
+        // Q3 Functions
         function updateQ3ProPreview() {
             const modal = document.getElementById('q3_pro_modal').value;
             const subject = document.getElementById('q3_pro_subject').value;
             const preview = document.getElementById('q3_pro_preview');
-            
-            if (modal) {
-                document.getElementById('q3_pro_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q3_pro_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} boost staff morale.`;
                 preview.className = 'sentence-preview correct';
@@ -2332,11 +2116,7 @@
             const modal = document.getElementById('q3_con_modal').value;
             const subject = document.getElementById('q3_con_subject').value;
             const preview = document.getElementById('q3_con_preview');
-            
-            if (modal) {
-                document.getElementById('q3_con_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q3_con_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} affect our professional image negatively.`;
                 preview.className = 'sentence-preview correct';
@@ -2359,9 +2139,7 @@
 
         function checkQ3Step1() {
             let feedback = document.getElementById('q3_step1_feedback');
-            let correct = 0;
-            let hasErrors = false;
-            let messages = [];
+            let correct = 0, hasErrors = false, messages = [];
             
             if (studentData.q3.pro_modal === 'can') {
                 correct++;
@@ -2375,7 +2153,7 @@
             }
             
             if (studentData.q3.pro_subject === 'It') {
-                // Best subject
+                // Best
             } else {
                 hasErrors = true;
                 messages.push('❌ PRO: "' + studentData.q3.pro_subject + '" is less natural. Use "It". Please change it!');
@@ -2393,7 +2171,7 @@
             }
             
             if (studentData.q3.con_subject === 'It') {
-                // Best subject
+                // Best
             } else {
                 hasErrors = true;
                 messages.push('❌ CON: "' + studentData.q3.con_subject + '" is less natural. Use "It". Please change it!');
@@ -2407,26 +2185,19 @@
             } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect choices! Moving to Step 2...</strong>';
-                
-                const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale.`;
-                const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively.`;
-                document.getElementById('q3_step2_pro_display').textContent = proSentence;
-                document.getElementById('q3_step2_con_display').textContent = conSentence;
-                
+                document.getElementById('q3_step2_pro_display').textContent = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale.`;
+                document.getElementById('q3_step2_con_display').textContent = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively.`;
                 setTimeout(() => goToPage(7), 2000);
             }
         }
 
-        // Q3 Step 2 Functions - WITH LOWERCASE FIX
         function updateQ3OrderPreview() {
             const order = document.getElementById('q3_first_sentence').value;
             const connective = document.getElementById('q3_connective').value;
             let proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale`;
             let conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively`;
-            
             const lowerProSentence = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
             const lowerConSentence = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
-            
             const firstBlank = document.getElementById('q3_first_blank');
             const connectiveBlank = document.getElementById('q3_connective_blank');
             const secondBlank = document.getElementById('q3_second_blank');
@@ -2435,7 +2206,6 @@
             if (order && connective) {
                 studentData.q3.order = order;
                 studentData.q3.connective = connective;
-                
                 if (connective === 'However') {
                     if (order === 'pro') {
                         firstBlank.textContent = proSentence + '.';
@@ -2457,11 +2227,9 @@
                         secondBlank.textContent = lowerProSentence + '.';
                     }
                 }
-                
                 firstBlank.className = 'fill-blank filled';
                 connectiveBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
-                
                 if (order === 'pro') {
                     feedback.className = 'feedback success show';
                     feedback.innerHTML = '✅ Well done! PRO first, then CON to emphasise it!';
@@ -2475,27 +2243,20 @@
         }
 
         function checkQ3Step2() {
-            const order = studentData.q3.order;
-            const feedback = document.getElementById('q3_step2_feedback');
-            
-            if (order === 'pro') {
+            if (studentData.q3.order === 'pro') {
+                const feedback = document.getElementById('q3_step2_feedback');
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = '✅ Perfect! Moving to Question 4...';
                 setTimeout(() => goToPage(8), 1500);
             }
         }
 
-        // ============ QUESTION 4 FUNCTIONS ============
-
+        // Q4 Functions
         function updateQ4ProPreview() {
             const modal = document.getElementById('q4_pro_modal').value;
             const subject = document.getElementById('q4_pro_subject').value;
             const preview = document.getElementById('q4_pro_preview');
-            
-            if (modal) {
-                document.getElementById('q4_pro_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q4_pro_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} improve staff satisfaction.`;
                 preview.className = 'sentence-preview correct';
@@ -2512,11 +2273,7 @@
             const modal = document.getElementById('q4_con_modal').value;
             const subject = document.getElementById('q4_con_subject').value;
             const preview = document.getElementById('q4_con_preview');
-            
-            if (modal) {
-                document.getElementById('q4_con_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('q4_con_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} need to set clear guidelines and monitor compliance regularly.`;
                 preview.className = 'sentence-preview correct';
@@ -2539,9 +2296,7 @@
 
         function checkQ4Step1() {
             let feedback = document.getElementById('q4_step1_feedback');
-            let correct = 0;
-            let hasErrors = false;
-            let messages = [];
+            let correct = 0, hasErrors = false, messages = [];
             
             if (studentData.q4.pro_modal === 'can') {
                 correct++;
@@ -2555,7 +2310,7 @@
             }
             
             if (studentData.q4.pro_subject === 'It') {
-                // Best subject
+                // Best
             } else {
                 hasErrors = true;
                 messages.push('❌ PRO: "' + studentData.q4.pro_subject + '" is less natural. Use "It". Please change it!');
@@ -2573,7 +2328,7 @@
             }
             
             if (studentData.q4.con_subject === 'We') {
-                // Best subject
+                // Best
             } else {
                 hasErrors = true;
                 messages.push('❌ CON: "' + studentData.q4.con_subject + '" is less natural. Use "We". Please change it!');
@@ -2587,23 +2342,17 @@
             } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Outstanding! Moving to Step 2...</strong>';
-                
-                const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction.`;
-                const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly.`;
-                document.getElementById('q4_step2_pro_display').textContent = proSentence;
-                document.getElementById('q4_step2_con_display').textContent = conSentence;
-                
+                document.getElementById('q4_step2_pro_display').textContent = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction.`;
+                document.getElementById('q4_step2_con_display').textContent = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly.`;
                 setTimeout(() => goToPage(9), 2000);
             }
         }
 
-        // Q4 Step 2 Functions
         function updateQ4OrderPreview() {
             const connective = document.getElementById('q4_connective').value;
             const order = document.getElementById('q4_first_sentence').value;
             const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction`;
             const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly`;
-            
             const connectiveBlank = document.getElementById('q4_connective_blank');
             const firstBlank = document.getElementById('q4_first_blank');
             const secondBlank = document.getElementById('q4_second_blank');
@@ -2612,8 +2361,6 @@
             if (connective && order) {
                 studentData.q4.connective = connective;
                 studentData.q4.order = order;
-                
-                // All are although-type
                 connectiveBlank.textContent = connective;
                 connectiveBlank.className = 'fill-blank filled';
                 
@@ -2628,7 +2375,6 @@
                 firstBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                // IMMEDIATE FEEDBACK
                 if (order === 'pro') {
                     feedback.className = 'feedback success show';
                     feedback.innerHTML = `✅ Perfect! PRO after "${connective.toLowerCase()}", then CON last to emphasise it!`;
@@ -2642,20 +2388,17 @@
         }
 
         function checkQ4Step2() {
-            const order = studentData.q4.order;
-            const feedback = document.getElementById('q4_step2_feedback');
-            
-            if (order === 'pro') {
+            if (studentData.q4.order === 'pro') {
+                const feedback = document.getElementById('q4_step2_feedback');
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = '✅ Excellent! Moving to Summary...';
                 setTimeout(() => goToPage(10), 1500);
             }
         }
-        // ============ SUMMARY PAGE FUNCTIONS ============
 
+        // Summary Function
         function loadSummary() {
             const scoreDisplay = document.getElementById('score-display');
-            // Cap accuracy at 100%
             const accuracy = Math.min(studentData.modalAccuracy, studentData.totalModals);
             const percentage = Math.round((accuracy / studentData.totalModals) * 100);
             scoreDisplay.textContent = percentage + '%';
@@ -2663,17 +2406,14 @@
             const strengthsContainer = document.getElementById('strengths-container');
             const weaknessesContainer = document.getElementById('weaknesses-container');
 
-            // Strengths
             let strengthsHTML = '';
             if (accuracy >= 6) {
                 strengthsHTML += '<div class="summary-item strength"><p>✓ Excellent modal verb selection!</p></div>';
             }
             strengthsHTML += '<div class="summary-item strength"><p>✓ Completed all sentence-building tasks</p></div>';
             strengthsHTML += '<div class="summary-item strength"><p>✓ Successfully connected ideas with connectives</p></div>';
-            
             strengthsContainer.innerHTML = strengthsHTML;
 
-            // Weaknesses
             let weaknessesHTML = '';
             if (accuracy < 6) {
                 weaknessesHTML += '<div class="summary-item weakness"><p>⚠️ Review when to use "can" vs "may" vs "will"</p></div>';
@@ -2684,61 +2424,44 @@
             if (weaknessesHTML === '') {
                 weaknessesHTML = '<div class="summary-item"><p style="color: #28a745;">🌟 No major weaknesses detected! Great job!</p></div>';
             }
-            
             weaknessesContainer.innerHTML = weaknessesHTML;
         }
 
-        // ============ CHALLENGE FUNCTIONS ============
-
+        // Challenge Functions
         function selectTopic(topic) {
             studentData.challenge.topic = topic;
             document.getElementById('topic-select-btn').disabled = false;
-            
             const radios = document.querySelectorAll('input[name="challenge-topic"]');
             radios.forEach(radio => {
-                if (radio.value === topic) {
-                    radio.checked = true;
-                }
+                if (radio.value === topic) radio.checked = true;
             });
         }
 
         function goToChallenge() {
             const topic = studentData.challenge.topic;
             const topicData = challengeTopics[topic];
-            
-            document.getElementById('challenge-topic-display').innerHTML = 
-                `${topicData.icon} ${topicData.title}`;
+            document.getElementById('challenge-topic-display').innerHTML = `${topicData.icon} ${topicData.title}`;
             document.getElementById('challenge-pro-text').textContent = topicData.pro;
             document.getElementById('challenge-con-text').textContent = topicData.con;
-            
             studentData.challenge.pro_text = topicData.pro;
             studentData.challenge.con_text = topicData.con;
-            
             goToPage(12);
         }
 
         function selectStance(stance) {
             studentData.challenge.stance = stance;
             document.getElementById('stance-select-btn').disabled = false;
-            
             const radios = document.querySelectorAll('input[name="challenge-stance"]');
             radios.forEach(radio => {
-                if (radio.value === stance) {
-                    radio.checked = true;
-                }
+                if (radio.value === stance) radio.checked = true;
             });
         }
 
-        // Challenge Build Functions
         function updateChallengeProPreview() {
             const modal = document.getElementById('challenge_pro_modal').value;
             const subject = document.getElementById('challenge_pro_subject').value;
             const preview = document.getElementById('challenge_pro_preview');
-            
-            if (modal) {
-                document.getElementById('challenge_pro_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('challenge_pro_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} ${studentData.challenge.pro_text}.`;
                 preview.className = 'sentence-preview correct';
@@ -2755,11 +2478,7 @@
             const modal = document.getElementById('challenge_con_modal').value;
             const subject = document.getElementById('challenge_con_subject').value;
             const preview = document.getElementById('challenge_con_preview');
-            
-            if (modal) {
-                document.getElementById('challenge_con_subject').disabled = false;
-            }
-            
+            if (modal) document.getElementById('challenge_con_subject').disabled = false;
             if (modal && subject) {
                 preview.textContent = `${subject} ${modal} ${studentData.challenge.con_text}.`;
                 preview.className = 'sentence-preview correct';
@@ -2775,18 +2494,13 @@
         function updateChallengeOrderPreview() {
             const order = document.getElementById('challenge_order').value;
             const connective = document.getElementById('challenge_connective').value;
-            
-            if (!studentData.challenge.pro_modal || !studentData.challenge.con_modal) {
-                return;
-            }
+            if (!studentData.challenge.pro_modal || !studentData.challenge.con_modal) return;
             
             const proSentence = `${studentData.challenge.pro_subject} ${studentData.challenge.pro_modal} ${studentData.challenge.pro_text}`;
             const conSentence = `${studentData.challenge.con_subject} ${studentData.challenge.con_modal} ${studentData.challenge.con_text}`;
-            
             const intro = document.getElementById('challenge_intro');
             const line1 = document.getElementById('challenge_preview_line1');
             const line2 = document.getElementById('challenge_preview_line2');
-            
             const topic = challengeTopics[studentData.challenge.topic];
             const stance = studentData.challenge.stance;
             
@@ -2799,12 +2513,9 @@
             if (order && connective) {
                 studentData.challenge.order = order;
                 studentData.challenge.connective = connective;
-                
-                // Check connective type
                 const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
                 
                 if (isAlthoughType) {
-                    // Although/Though/Even though: Connective sentence, sentence.
                     if (order === 'pro-first') {
                         line1.textContent = `${connective} ${proSentence},`;
                         line2.textContent = conSentence + '.';
@@ -2813,7 +2524,6 @@
                         line2.textContent = proSentence + '.';
                     }
                 } else if (connective === 'However') {
-                    // However: Sentence. However, sentence.
                     const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
                     const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
                     if (order === 'pro-first') {
@@ -2824,7 +2534,6 @@
                         line2.textContent = `However, ${lowerPro}.`;
                     }
                 } else {
-                    // But: sentence, but sentence.
                     const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
                     const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
                     if (order === 'pro-first') {
@@ -2835,10 +2544,8 @@
                         line2.textContent = lowerPro + '.';
                     }
                 }
-                
                 line1.className = 'fill-blank filled';
                 line2.className = 'fill-blank filled';
-                
                 checkChallengeBuildButtonState();
             }
         }
@@ -2855,31 +2562,21 @@
         function checkChallenge() {
             const stance = studentData.challenge.stance;
             const order = studentData.challenge.order;
-            const connective = studentData.challenge.connective;
             const feedback = document.getElementById('challenge_feedback');
-            
-            let isCorrect = false;
-            let message = '';
+            let isCorrect = false, message = '';
             
             if (stance === 'preferable') {
-                // Should emphasise PRO (PRO comes LAST)
                 if (order === 'con-first') {
-                    // Correct! CON first, PRO last
                     isCorrect = true;
                     message = `✅ Perfect! CON first, then PRO last to emphasise it!`;
                 } else {
-                    // Wrong - PRO first, CON last
                     message = '❌ Not quite right. To emphasise the PRO (since you prefer it), put PRO LAST. Try "CON first"!';
                 }
             } else {
-                // stance is 'not-preferable'
-                // Should emphasise CON (CON comes LAST)
                 if (order === 'pro-first') {
-                    // Correct! PRO first, CON last
                     isCorrect = true;
                     message = `✅ Excellent! PRO first, then CON last to emphasise it!`;
                 } else {
-                    // Wrong - CON first, PRO last
                     message = '❌ Not quite right. To emphasise the CON (since you don\'t prefer it), put CON LAST. Try "PRO first"!';
                 }
             }
@@ -2905,10 +2602,8 @@
             const stance = studentData.challenge.stance;
             const order = studentData.challenge.order;
             const connective = studentData.challenge.connective;
-            
             const proSentence = `${studentData.challenge.pro_subject} ${studentData.challenge.pro_modal} ${studentData.challenge.pro_text}`;
             const conSentence = `${studentData.challenge.con_subject} ${studentData.challenge.con_modal} ${studentData.challenge.con_text}`;
-            
             const paragraphBox = document.getElementById('challenge-final-paragraph');
             const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
             
@@ -2940,7 +2635,6 @@
                     paragraphHTML += `<div class="template-line">However, ${lowerPro}.</div>`;
                 }
             } else {
-                // But
                 const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
                 const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
                 if (order === 'pro-first') {
@@ -2951,19 +2645,15 @@
             }
             
             paragraphBox.innerHTML = paragraphHTML;
-            
-            // Checks
             document.getElementById('logic-check').textContent = 'Stance and emphasis match! ✓';
             document.getElementById('structure-check').textContent = 'Connective used correctly! ✓';
-            
             const finalFeedback = document.getElementById('challenge-final-feedback');
             finalFeedback.className = 'feedback success show';
             finalFeedback.textContent = '🎉 Well done! You\'ve successfully created a well-structured argument!';
         }
 
-        // Initialize
+        // Initialize - WITH BUG FIX
         document.addEventListener('DOMContentLoaded', function() {
-            // Update page 13 when navigating to it
             const originalGoToPage = window.goToPage;
             window.goToPage = function(pageNum) {
                 if (pageNum === 10) {
@@ -2974,9 +2664,7 @@
                     const topicData = challengeTopics[topic];
                     const stance = studentData.challenge.stance;
                     
-                    document.getElementById('challenge-final-topic').innerHTML = 
-                        `${topicData.icon} ${topicData.title}`;
-                    
+                    document.getElementById('challenge-final-topic').innerHTML = `${topicData.icon} ${topicData.title}`;
                     const stanceElement = document.getElementById('challenge-final-stance');
                     if (stance === 'preferable') {
                         stanceElement.className = 'stance preferable';
@@ -2985,23 +2673,28 @@
                         stanceElement.className = 'stance not-preferable';
                         stanceElement.textContent = 'NOT PREFERABLE ❌';
                     }
-                    
                     document.getElementById('challenge-build-pro').textContent = topicData.pro;
                     document.getElementById('challenge-build-con').textContent = topicData.con;
                     
-                    // Update subject dropdowns
                     const proSubjectSelect = document.getElementById('challenge_pro_subject');
                     const conSubjectSelect = document.getElementById('challenge_con_subject');
-                    
                     proSubjectSelect.innerHTML = '<option value="">-- Select subject --</option>';
                     topicData.pro_subjects.forEach(subj => {
                         proSubjectSelect.innerHTML += `<option value="${subj}">${subj}</option>`;
                     });
-                    
                     conSubjectSelect.innerHTML = '<option value="">-- Select subject --</option>';
                     topicData.con_subjects.forEach(subj => {
                         conSubjectSelect.innerHTML += `<option value="${subj}">${subj}</option>`;
                     });
+                    
+                    // FIX: Set intro statement immediately
+                    const intro = document.getElementById('challenge_intro');
+                    if (stance === 'preferable') {
+                        intro.textContent = `${topicData.title} is preferable.`;
+                    } else {
+                        intro.textContent = `My preference would not be for ${topicData.title.toLowerCase()}.`;
+                    }
+                    intro.className = 'template-line intro';
                 }
                 originalGoToPage(pageNum);
             };
@@ -3009,3 +2702,4 @@
     </script>
 </body>
 </html>
+
