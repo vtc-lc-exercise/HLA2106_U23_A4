@@ -716,7 +716,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Page 1: Landing -->
+        <!-- Page 1: Landing with Dashboard -->
         <div class="page active" id="page1">
             <div class="landing">
                 <div class="emoji-float">
@@ -728,7 +728,22 @@
                 <h1>HLA2106: Workplace Writing II</h1>
                 <h2>Unit 23: Presenting Arguments</h2>
                 <p>Learn to present arguments step by step!<br>Master modal verbs, sentence structure, and connectives.</p>
-                <button class="start-btn" onclick="goToPage(2)">Start Learning 🚀</button>
+                
+                <div style="display: flex; gap: 20px; margin-top: 30px; flex-wrap: wrap; justify-content: center;">
+                    <div class="point-card" style="cursor: pointer; flex: 1; min-width: 250px; max-width: 350px; text-align: center;" onclick="goToPage(2)">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">📚</div>
+                        <h3 style="color: #667eea; margin-bottom: 10px;">Guided Practice</h3>
+                        <p style="color: #666; margin-bottom: 15px;">Start with Questions 1-4<br>Learn step by step</p>
+                        <button class="btn btn-primary" style="width: 100%;">Start Learning →</button>
+                    </div>
+                    
+                    <div class="point-card" style="cursor: pointer; flex: 1; min-width: 250px; max-width: 350px; text-align: center;" onclick="goToPage(11)">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🌟</div>
+                        <h3 style="color: #764ba2; margin-bottom: 10px;">Challenge Yourself</h3>
+                        <p style="color: #666; margin-bottom: 15px;">Skip to the challenge<br>Test your skills</p>
+                        <button class="btn btn-secondary" style="width: 100%; background: linear-gradient(135deg, #ffc107, #ff9800); color: white;">Skip to Challenge →</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -902,13 +917,13 @@
                     </div>
                     
                     <div class="template-line">
-                        <span class="fill-blank" id="q1_connective_blank">...</span>, <span class="fill-blank" id="q1_second_blank">...</span>
+                        <span class="fill-blank" id="q1_connective_blank">...</span><span class="fill-blank" id="q1_second_blank">...</span>
                     </div>
 
                     <div class="connective-info">
                         <strong>💡 Connective Guide:</strong><br>
-                        • <strong>However</strong> = starts a new sentence (formal)<br>
-                        • <strong>But</strong> = continues the same sentence (less formal)
+                        • <strong>However</strong> = starts a new sentence (formal): Sentence. However, sentence.<br>
+                        • <strong>But</strong> = continues the same sentence (less formal): sentence, but sentence.
                     </div>
                 </div>
 
@@ -1289,7 +1304,7 @@
                     </div>
                     
                     <div class="template-line">
-                        <span class="fill-blank" id="q3_connective_blank">...</span>, <span class="fill-blank" id="q3_second_blank">...</span>
+                        <span class="fill-blank" id="q3_connective_blank">...</span><span class="fill-blank" id="q3_second_blank">...</span>
                     </div>
                 </div>
 
@@ -1989,6 +2004,7 @@
         function checkQ1Step1() {
             let feedback = document.getElementById('q1_step1_feedback');
             let correct = 0;
+            let hasErrors = false;
             let messages = [];
             
             // Check PRO modal (can is ideal)
@@ -1996,9 +2012,19 @@
                 correct++;
                 messages.push('✅ "Can" is perfect for showing ability/possibility!');
             } else if (studentData.q1.pro_modal === 'will') {
-                messages.push('⚠️ "Will" is too certain. "Can" is better for possibility.');
+                hasErrors = true;
+                messages.push('❌ PRO: "Will" is too certain. Use "can" for possibility. Please change it!');
             } else if (studentData.q1.pro_modal === 'may') {
-                messages.push('⚠️ "May" works but "can" is stronger for showing ability.');
+                hasErrors = true;
+                messages.push('❌ PRO: "May" works but "can" is stronger. Please change it!');
+            }
+            
+            // Check PRO subject (The new uniform or It)
+            if (studentData.q1.pro_subject === 'The new uniform' || studentData.q1.pro_subject === 'It') {
+                // Good subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ PRO: "We" doesn\'t fit here. Use "The new uniform" or "It". Please change it!');
             }
             
             // Check CON modal (will is ideal)
@@ -2006,80 +2032,109 @@
                 correct++;
                 messages.push('✅ "Will" is perfect - costs are certain!');
             } else if (studentData.q1.con_modal === 'may') {
-                messages.push('⚠️ "May" is uncertain. Costs are definite, so "will" is better.');
+                hasErrors = true;
+                messages.push('❌ CON: "May" is uncertain. Costs are definite, so use "will". Please change it!');
             } else if (studentData.q1.con_modal === 'can') {
-                messages.push('⚠️ "Can" doesn\'t fit here. Use "will" for certain costs.');
+                hasErrors = true;
+                messages.push('❌ CON: "Can" doesn\'t fit here. Use "will" for certain costs. Please change it!');
+            }
+            
+            // Check CON subject (It is best)
+            if (studentData.q1.con_subject === 'It') {
+                // Perfect subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ CON: "' + studentData.q1.con_subject + '" is less natural. Use "It". Please change it!');
             }
             
             studentData.modalAccuracy += correct;
             
             // Show feedback
-            if (correct === 2) {
+            if (hasErrors) {
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = messages.join('<br>');
+            } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect! Moving to Step 2...</strong>';
-            } else {
-                feedback.className = 'feedback info show';
-                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good try! Moving to Step 2...</strong>';
+                
+                const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional.`;
+                const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel.`;
+                document.getElementById('q1_step2_pro_display').textContent = proSentence;
+                document.getElementById('q1_step2_con_display').textContent = conSentence;
+                
+                setTimeout(() => goToPage(3), 2000);
             }
-            
-            // Update display sentences for page 3
-            const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional.`;
-            const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel.`;
-            document.getElementById('q1_step2_pro_display').textContent = proSentence;
-            document.getElementById('q1_step2_con_display').textContent = conSentence;
-            
-            setTimeout(() => goToPage(3), 2000);
         }
 
-        // Q1 Step 2 Functions
+        // Q1 Step 2 Functions - WITH LOWERCASE FIX
         function updateQ1OrderPreview() {
             const order = document.getElementById('q1_first_sentence').value;
             const connective = document.getElementById('q1_connective').value;
-            const proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional`;
-            const conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel`;
+            let proSentence = `${studentData.q1.pro_subject} ${studentData.q1.pro_modal} make staff look more professional`;
+            let conSentence = `${studentData.q1.con_subject} ${studentData.q1.con_modal} incur high costs for the hotel`;
+            
+            // Lowercase first letter for "but" and after "However,"
+            const lowerProSentence = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+            const lowerConSentence = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
             
             const firstBlank = document.getElementById('q1_first_blank');
             const connectiveBlank = document.getElementById('q1_connective_blank');
             const secondBlank = document.getElementById('q1_second_blank');
+            const feedback = document.getElementById('q1_step2_feedback');
             
             if (order && connective) {
                 studentData.q1.order = order;
                 studentData.q1.connective = connective;
                 
-                if (order === 'pro') {
-                    firstBlank.textContent = proSentence + '.';
-                    connectiveBlank.textContent = connective.toLowerCase();
-                    secondBlank.textContent = conSentence;
+                if (connective === 'However') {
+                    // However: Sentence. However, sentence. (lowercase after comma)
+                    if (order === 'pro') {
+                        firstBlank.textContent = proSentence + '.';
+                        connectiveBlank.textContent = ' However, ';
+                        secondBlank.textContent = lowerConSentence + '.';
+                    } else {
+                        firstBlank.textContent = conSentence + '.';
+                        connectiveBlank.textContent = ' However, ';
+                        secondBlank.textContent = lowerProSentence + '.';
+                    }
                 } else {
-                    firstBlank.textContent = conSentence + '.';
-                    connectiveBlank.textContent = connective.toLowerCase();
-                    secondBlank.textContent = proSentence;
+                    // But: sentence, but sentence. (lowercase throughout)
+                    if (order === 'pro') {
+                        firstBlank.textContent = lowerProSentence;
+                        connectiveBlank.textContent = ', but ';
+                        secondBlank.textContent = lowerConSentence + '.';
+                    } else {
+                        firstBlank.textContent = lowerConSentence;
+                        connectiveBlank.textContent = ', but ';
+                        secondBlank.textContent = lowerProSentence + '.';
+                    }
                 }
                 
                 firstBlank.className = 'fill-blank filled';
                 connectiveBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                document.getElementById('q1_step2_next').disabled = false;
+                // IMMEDIATE FEEDBACK
+                if (order === 'pro') {
+                    feedback.className = 'feedback success show';
+                    feedback.innerHTML = `✅ Good! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
+                    document.getElementById('q1_step2_next').disabled = false;
+                } else {
+                    feedback.className = 'feedback error show';
+                    feedback.innerHTML = '❌ Not quite. Since it\'s NOT PREFERABLE, the CON should come AFTER the connective to emphasise it. Try a different order!';
+                    document.getElementById('q1_step2_next').disabled = true;
+                }
             }
         }
 
         function checkQ1Step2() {
             const order = studentData.q1.order;
-            const connective = studentData.q1.connective;
             const feedback = document.getElementById('q1_step2_feedback');
             
-            // Correct: PRO first, CON after connective (to emphasise CON)
             if (order === 'pro') {
                 feedback.className = 'feedback success show';
-                feedback.innerHTML = `✅ Excellent! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
+                feedback.innerHTML = `✅ Excellent! Moving to Question 2...`;
                 setTimeout(() => goToPage(4), 1500);
-            } else {
-                feedback.className = 'feedback error show';
-                feedback.textContent = '❌ Not quite. Since it\'s NOT PREFERABLE, the CON should come AFTER the connective to emphasise it. Try again!';
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 3000);
             }
         }
 
@@ -2138,19 +2193,27 @@
         function checkQ2Step1() {
             let feedback = document.getElementById('q2_step1_feedback');
             let correct = 0;
+            let hasErrors = false;
             let messages = [];
             
-            // Check PRO modal (can is ideal)
             if (studentData.q2.pro_modal === 'can') {
                 correct++;
                 messages.push('✅ "Can" is excellent for showing what the service can do!');
             } else if (studentData.q2.pro_modal === 'will') {
-                messages.push('⚠️ "Will" is too strong. "Can" is better for showing ability.');
+                hasErrors = true;
+                messages.push('❌ PRO: "Will" is too strong. Use "can" for ability. Please change it!');
             } else if (studentData.q2.pro_modal === 'may') {
-                messages.push('⚠️ "May" is too uncertain. "Can" shows clear ability.');
+                hasErrors = true;
+                messages.push('❌ PRO: "May" is too uncertain. Use "can" for clear ability. Please change it!');
             }
             
-            // Check CON modal (will or may acceptable, but will is better)
+            if (studentData.q2.pro_subject === 'It' || studentData.q2.pro_subject === 'The service') {
+                // Good subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ PRO: "We" is less natural here. Use "It" or "The service". Please change it!');
+            }
+            
             if (studentData.q2.con_modal === 'will') {
                 correct++;
                 messages.push('✅ "Will" is perfect - outsourcing is necessary!');
@@ -2158,27 +2221,33 @@
                 correct++;
                 messages.push('✅ "May" works - there\'s some uncertainty about outsourcing.');
             } else if (studentData.q2.con_modal === 'can') {
-                messages.push('⚠️ "Can" doesn\'t fit. Use "will" or "may" for necessity.');
+                hasErrors = true;
+                messages.push('❌ CON: "Can" doesn\'t fit. Use "will" or "may". Please change it!');
+            }
+            
+            if (studentData.q2.con_subject === 'We') {
+                // Best subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ CON: "' + studentData.q2.con_subject + '" is less natural. Use "We". Please change it!');
             }
             
             studentData.modalAccuracy += correct;
             
-            // Show feedback
-            if (correct === 2) {
+            if (hasErrors) {
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = messages.join('<br>');
+            } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Excellent! Moving to Step 2...</strong>';
-            } else {
-                feedback.className = 'feedback info show';
-                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good effort! Moving to Step 2...</strong>';
+                
+                const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic.`;
+                const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service.`;
+                document.getElementById('q2_step2_pro_display').textContent = proSentence;
+                document.getElementById('q2_step2_con_display').textContent = conSentence;
+                
+                setTimeout(() => goToPage(5), 2000);
             }
-            
-            // Update display sentences
-            const proSentence = `${studentData.q2.pro_subject} ${studentData.q2.pro_modal} ensure uniforms are always clean and hygienic.`;
-            const conSentence = `${studentData.q2.con_subject} ${studentData.q2.con_modal} need to outsource the service.`;
-            document.getElementById('q2_step2_pro_display').textContent = proSentence;
-            document.getElementById('q2_step2_con_display').textContent = conSentence;
-            
-            setTimeout(() => goToPage(5), 2000);
         }
 
         // Q2 Step 2 Functions
@@ -2191,12 +2260,14 @@
             const connectiveBlank = document.getElementById('q2_connective_blank');
             const firstBlank = document.getElementById('q2_first_blank');
             const secondBlank = document.getElementById('q2_second_blank');
+            const feedback = document.getElementById('q2_step2_feedback');
             
             if (connective && order) {
                 studentData.q2.connective = connective;
                 studentData.q2.order = order;
                 
-                connectiveBlank.textContent = connective.toLowerCase();
+                // All are although-type: Connective sentence, sentence.
+                connectiveBlank.textContent = connective;
                 connectiveBlank.className = 'fill-blank filled';
                 
                 if (order === 'con') {
@@ -2210,26 +2281,27 @@
                 firstBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                document.getElementById('q2_step2_next').disabled = false;
+                // IMMEDIATE FEEDBACK
+                if (order === 'con') {
+                    feedback.className = 'feedback success show';
+                    feedback.innerHTML = `✅ Excellent! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
+                    document.getElementById('q2_step2_next').disabled = false;
+                } else {
+                    feedback.className = 'feedback error show';
+                    feedback.innerHTML = '❌ Not quite. Since it\'s PREFERABLE, the PRO should come LAST to emphasise it. Try the other order!';
+                    document.getElementById('q2_step2_next').disabled = true;
+                }
             }
         }
 
         function checkQ2Step2() {
             const order = studentData.q2.order;
-            const connective = studentData.q2.connective;
             const feedback = document.getElementById('q2_step2_feedback');
             
-            // Correct: CON after connective, PRO last (to emphasise PRO)
             if (order === 'con') {
                 feedback.className = 'feedback success show';
-                feedback.innerHTML = `✅ Excellent! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
+                feedback.innerHTML = `✅ Perfect! Moving to Question 3...`;
                 setTimeout(() => goToPage(6), 1500);
-            } else {
-                feedback.className = 'feedback error show';
-                feedback.textContent = '❌ Not quite. Since it\'s PREFERABLE, the PRO should come LAST to emphasise it. Try again!';
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 3000);
             }
         }
 
@@ -2288,78 +2360,117 @@
         function checkQ3Step1() {
             let feedback = document.getElementById('q3_step1_feedback');
             let correct = 0;
+            let hasErrors = false;
             let messages = [];
             
-            // Check PRO modal (can is ideal)
             if (studentData.q3.pro_modal === 'can') {
                 correct++;
                 messages.push('✅ "Can" is great for showing potential benefit!');
             } else if (studentData.q3.pro_modal === 'will') {
-                messages.push('⚠️ "Will" is too certain. "Can" is better for possibility.');
+                hasErrors = true;
+                messages.push('❌ PRO: "Will" is too certain. Use "can" for possibility. Please change it!');
             } else if (studentData.q3.pro_modal === 'may') {
-                messages.push('⚠️ "May" is very uncertain. "Can" shows clearer ability.');
+                hasErrors = true;
+                messages.push('❌ PRO: "May" is very uncertain. Use "can" for clearer ability. Please change it!');
             }
             
-            // Check CON modal (may is ideal - it's a possibility, not certain)
+            if (studentData.q3.pro_subject === 'It') {
+                // Best subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ PRO: "' + studentData.q3.pro_subject + '" is less natural. Use "It". Please change it!');
+            }
+            
             if (studentData.q3.con_modal === 'may') {
                 correct++;
                 messages.push('✅ "May" is perfect - the negative impact is possible, not certain!');
             } else if (studentData.q3.con_modal === 'will') {
-                messages.push('⚠️ "Will" is too strong. The impact is only possible, so "may" is better.');
+                hasErrors = true;
+                messages.push('❌ CON: "Will" is too strong. Use "may" for possibility. Please change it!');
             } else if (studentData.q3.con_modal === 'can') {
-                messages.push('⚠️ "Can" doesn\'t fit. Use "may" for possible negative impact.');
+                hasErrors = true;
+                messages.push('❌ CON: "Can" doesn\'t fit. Use "may" for possible impact. Please change it!');
+            }
+            
+            if (studentData.q3.con_subject === 'It') {
+                // Best subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ CON: "' + studentData.q3.con_subject + '" is less natural. Use "It". Please change it!');
             }
             
             studentData.modalAccuracy += correct;
             
-            // Show feedback
-            if (correct === 2) {
+            if (hasErrors) {
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = messages.join('<br>');
+            } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Perfect choices! Moving to Step 2...</strong>';
-            } else {
-                feedback.className = 'feedback info show';
-                feedback.innerHTML = messages.join('<br>') + '<br><strong>Keep practising! Moving to Step 2...</strong>';
+                
+                const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale.`;
+                const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively.`;
+                document.getElementById('q3_step2_pro_display').textContent = proSentence;
+                document.getElementById('q3_step2_con_display').textContent = conSentence;
+                
+                setTimeout(() => goToPage(7), 2000);
             }
-            
-            // Update display sentences
-            const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale.`;
-            const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively.`;
-            document.getElementById('q3_step2_pro_display').textContent = proSentence;
-            document.getElementById('q3_step2_con_display').textContent = conSentence;
-            
-            setTimeout(() => goToPage(7), 2000);
         }
 
-        // Q3 Step 2 Functions
+        // Q3 Step 2 Functions - WITH LOWERCASE FIX
         function updateQ3OrderPreview() {
             const order = document.getElementById('q3_first_sentence').value;
             const connective = document.getElementById('q3_connective').value;
-            const proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale`;
-            const conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively`;
+            let proSentence = `${studentData.q3.pro_subject} ${studentData.q3.pro_modal} boost staff morale`;
+            let conSentence = `${studentData.q3.con_subject} ${studentData.q3.con_modal} affect our professional image negatively`;
+            
+            const lowerProSentence = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+            const lowerConSentence = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
             
             const firstBlank = document.getElementById('q3_first_blank');
             const connectiveBlank = document.getElementById('q3_connective_blank');
             const secondBlank = document.getElementById('q3_second_blank');
+            const feedback = document.getElementById('q3_step2_feedback');
             
             if (order && connective) {
                 studentData.q3.order = order;
                 studentData.q3.connective = connective;
                 
-                if (order === 'pro') {
-                    firstBlank.textContent = proSentence + '.';
-                    connectiveBlank.textContent = connective.toLowerCase();
-                    secondBlank.textContent = conSentence;
+                if (connective === 'However') {
+                    if (order === 'pro') {
+                        firstBlank.textContent = proSentence + '.';
+                        connectiveBlank.textContent = ' However, ';
+                        secondBlank.textContent = lowerConSentence + '.';
+                    } else {
+                        firstBlank.textContent = conSentence + '.';
+                        connectiveBlank.textContent = ' However, ';
+                        secondBlank.textContent = lowerProSentence + '.';
+                    }
                 } else {
-                    firstBlank.textContent = conSentence + '.';
-                    connectiveBlank.textContent = connective.toLowerCase();
-                    secondBlank.textContent = proSentence;
+                    if (order === 'pro') {
+                        firstBlank.textContent = lowerProSentence;
+                        connectiveBlank.textContent = ', but ';
+                        secondBlank.textContent = lowerConSentence + '.';
+                    } else {
+                        firstBlank.textContent = lowerConSentence;
+                        connectiveBlank.textContent = ', but ';
+                        secondBlank.textContent = lowerProSentence + '.';
+                    }
                 }
                 
                 firstBlank.className = 'fill-blank filled';
                 connectiveBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                document.getElementById('q3_step2_next').disabled = false;
+                if (order === 'pro') {
+                    feedback.className = 'feedback success show';
+                    feedback.innerHTML = '✅ Well done! PRO first, then CON to emphasise it!';
+                    document.getElementById('q3_step2_next').disabled = false;
+                } else {
+                    feedback.className = 'feedback error show';
+                    feedback.innerHTML = '❌ Try again. The CON should come after the connective to emphasise why it\'s NOT preferable. Try the other order!';
+                    document.getElementById('q3_step2_next').disabled = true;
+                }
             }
         }
 
@@ -2367,17 +2478,10 @@
             const order = studentData.q3.order;
             const feedback = document.getElementById('q3_step2_feedback');
             
-            // Correct: PRO first, CON after connective
             if (order === 'pro') {
                 feedback.className = 'feedback success show';
-                feedback.textContent = '✅ Well done! PRO first, then CON to emphasise it!';
+                feedback.innerHTML = '✅ Perfect! Moving to Question 4...';
                 setTimeout(() => goToPage(8), 1500);
-            } else {
-                feedback.className = 'feedback error show';
-                feedback.textContent = '❌ Try again. The CON should come after the connective to emphasise why it\'s NOT preferable.';
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 3000);
             }
         }
 
@@ -2436,46 +2540,61 @@
         function checkQ4Step1() {
             let feedback = document.getElementById('q4_step1_feedback');
             let correct = 0;
+            let hasErrors = false;
             let messages = [];
             
-            // Check PRO modal (can is ideal)
             if (studentData.q4.pro_modal === 'can') {
                 correct++;
                 messages.push('✅ "Can" is excellent for showing potential benefit!');
             } else if (studentData.q4.pro_modal === 'will') {
-                messages.push('⚠️ "Will" is too certain. "Can" is better for showing ability.');
+                hasErrors = true;
+                messages.push('❌ PRO: "Will" is too certain. Use "can" for ability. Please change it!');
             } else if (studentData.q4.pro_modal === 'may') {
-                messages.push('⚠️ "May" is uncertain. "Can" shows clearer potential.');
+                hasErrors = true;
+                messages.push('❌ PRO: "May" is uncertain. Use "can" for clearer potential. Please change it!');
             }
             
-            // Check CON modal (will is ideal - setting guidelines is necessary/certain)
+            if (studentData.q4.pro_subject === 'It') {
+                // Best subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ PRO: "' + studentData.q4.pro_subject + '" is less natural. Use "It". Please change it!');
+            }
+            
             if (studentData.q4.con_modal === 'will') {
                 correct++;
                 messages.push('✅ "Will" is perfect - guidelines will definitely be needed!');
             } else if (studentData.q4.con_modal === 'may') {
-                messages.push('⚠️ "May" is uncertain. Guidelines are necessary, so "will" is better.');
+                hasErrors = true;
+                messages.push('❌ CON: "May" is uncertain. Use "will" for certainty. Please change it!');
             } else if (studentData.q4.con_modal === 'can') {
-                messages.push('⚠️ "Can" doesn\'t fit. Use "will" for certain necessity.');
+                hasErrors = true;
+                messages.push('❌ CON: "Can" doesn\'t fit. Use "will" for necessity. Please change it!');
+            }
+            
+            if (studentData.q4.con_subject === 'We') {
+                // Best subject
+            } else {
+                hasErrors = true;
+                messages.push('❌ CON: "' + studentData.q4.con_subject + '" is less natural. Use "We". Please change it!');
             }
             
             studentData.modalAccuracy += correct;
             
-            // Show feedback
-            if (correct === 2) {
+            if (hasErrors) {
+                feedback.className = 'feedback error show';
+                feedback.innerHTML = messages.join('<br>');
+            } else {
                 feedback.className = 'feedback success show';
                 feedback.innerHTML = messages.join('<br>') + '<br><strong>Outstanding! Moving to Step 2...</strong>';
-            } else {
-                feedback.className = 'feedback info show';
-                feedback.innerHTML = messages.join('<br>') + '<br><strong>Good attempt! Moving to Step 2...</strong>';
+                
+                const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction.`;
+                const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly.`;
+                document.getElementById('q4_step2_pro_display').textContent = proSentence;
+                document.getElementById('q4_step2_con_display').textContent = conSentence;
+                
+                setTimeout(() => goToPage(9), 2000);
             }
-            
-            // Update display sentences
-            const proSentence = `${studentData.q4.pro_subject} ${studentData.q4.pro_modal} improve staff satisfaction.`;
-            const conSentence = `${studentData.q4.con_subject} ${studentData.q4.con_modal} need to set clear guidelines and monitor compliance regularly.`;
-            document.getElementById('q4_step2_pro_display').textContent = proSentence;
-            document.getElementById('q4_step2_con_display').textContent = conSentence;
-            
-            setTimeout(() => goToPage(9), 2000);
         }
 
         // Q4 Step 2 Functions
@@ -2488,12 +2607,14 @@
             const connectiveBlank = document.getElementById('q4_connective_blank');
             const firstBlank = document.getElementById('q4_first_blank');
             const secondBlank = document.getElementById('q4_second_blank');
+            const feedback = document.getElementById('q4_step2_feedback');
             
             if (connective && order) {
                 studentData.q4.connective = connective;
                 studentData.q4.order = order;
                 
-                connectiveBlank.textContent = connective.toLowerCase();
+                // All are although-type
+                connectiveBlank.textContent = connective;
                 connectiveBlank.className = 'fill-blank filled';
                 
                 if (order === 'pro') {
@@ -2507,7 +2628,16 @@
                 firstBlank.className = 'fill-blank filled';
                 secondBlank.className = 'fill-blank filled';
                 
-                document.getElementById('q4_step2_next').disabled = false;
+                // IMMEDIATE FEEDBACK
+                if (order === 'pro') {
+                    feedback.className = 'feedback success show';
+                    feedback.innerHTML = `✅ Perfect! PRO after "${connective.toLowerCase()}", then CON last to emphasise it!`;
+                    document.getElementById('q4_step2_next').disabled = false;
+                } else {
+                    feedback.className = 'feedback error show';
+                    feedback.innerHTML = '❌ Not quite. Put the CON LAST to emphasise why it\'s NOT preferable. Try the other order!';
+                    document.getElementById('q4_step2_next').disabled = true;
+                }
             }
         }
 
@@ -2515,24 +2645,19 @@
             const order = studentData.q4.order;
             const feedback = document.getElementById('q4_step2_feedback');
             
-            // Correct: PRO after connective, CON last (to emphasise CON)
             if (order === 'pro') {
                 feedback.className = 'feedback success show';
-                feedback.textContent = '✅ Perfect! PRO first, then CON last to emphasise why it\'s NOT preferable!';
+                feedback.innerHTML = '✅ Excellent! Moving to Summary...';
                 setTimeout(() => goToPage(10), 1500);
-            } else {
-                feedback.className = 'feedback error show';
-                feedback.textContent = '❌ Not quite. The CON should come LAST to emphasise why it\'s NOT preferable. Try again!';
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 3000);
             }
         }
         // ============ SUMMARY PAGE FUNCTIONS ============
 
         function loadSummary() {
             const scoreDisplay = document.getElementById('score-display');
-            const percentage = Math.round((studentData.modalAccuracy / studentData.totalModals) * 100);
+            // Cap accuracy at 100%
+            const accuracy = Math.min(studentData.modalAccuracy, studentData.totalModals);
+            const percentage = Math.round((accuracy / studentData.totalModals) * 100);
             scoreDisplay.textContent = percentage + '%';
 
             const strengthsContainer = document.getElementById('strengths-container');
@@ -2540,7 +2665,7 @@
 
             // Strengths
             let strengthsHTML = '';
-            if (studentData.modalAccuracy >= 6) {
+            if (accuracy >= 6) {
                 strengthsHTML += '<div class="summary-item strength"><p>✓ Excellent modal verb selection!</p></div>';
             }
             strengthsHTML += '<div class="summary-item strength"><p>✓ Completed all sentence-building tasks</p></div>';
@@ -2550,10 +2675,10 @@
 
             // Weaknesses
             let weaknessesHTML = '';
-            if (studentData.modalAccuracy < 6) {
+            if (accuracy < 6) {
                 weaknessesHTML += '<div class="summary-item weakness"><p>⚠️ Review when to use "can" vs "may" vs "will"</p></div>';
             }
-            if (studentData.modalAccuracy < 4) {
+            if (accuracy < 4) {
                 weaknessesHTML += '<div class="summary-item weakness"><p>⚠️ "Can" = ability/possibility, "May" = possibility/uncertainty, "Will" = certainty/future</p></div>';
             }
             if (weaknessesHTML === '') {
@@ -2675,11 +2800,11 @@
                 studentData.challenge.order = order;
                 studentData.challenge.connective = connective;
                 
-                // Check if connective is although/though/even though or however/but
+                // Check connective type
                 const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
                 
                 if (isAlthoughType) {
-                    // Although-type: connective + sentence, sentence
+                    // Although/Though/Even though: Connective sentence, sentence.
                     if (order === 'pro-first') {
                         line1.textContent = `${connective} ${proSentence},`;
                         line2.textContent = conSentence + '.';
@@ -2687,14 +2812,27 @@
                         line1.textContent = `${connective} ${conSentence},`;
                         line2.textContent = proSentence + '.';
                     }
-                } else {
-                    // However/But: sentence. Connective, sentence
+                } else if (connective === 'However') {
+                    // However: Sentence. However, sentence.
+                    const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+                    const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
                     if (order === 'pro-first') {
                         line1.textContent = proSentence + '.';
-                        line2.textContent = `${connective}, ${conSentence}.`;
+                        line2.textContent = `However, ${lowerCon}.`;
                     } else {
                         line1.textContent = conSentence + '.';
-                        line2.textContent = `${connective}, ${proSentence}.`;
+                        line2.textContent = `However, ${lowerPro}.`;
+                    }
+                } else {
+                    // But: sentence, but sentence.
+                    const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+                    const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
+                    if (order === 'pro-first') {
+                        line1.textContent = `${lowerPro}, but`;
+                        line2.textContent = lowerCon + '.';
+                    } else {
+                        line1.textContent = `${lowerCon}, but`;
+                        line2.textContent = lowerPro + '.';
                     }
                 }
                 
@@ -2720,32 +2858,29 @@
             const connective = studentData.challenge.connective;
             const feedback = document.getElementById('challenge_feedback');
             
-            const isAlthoughType = ['Although', 'Though', 'Even though'].includes(connective);
-            const isHoweverType = ['However', 'But'].includes(connective);
-            
             let isCorrect = false;
             let message = '';
             
             if (stance === 'preferable') {
-                // Should emphasise PRO (PRO comes last)
-                if (isAlthoughType && order === 'con-first') {
+                // Should emphasise PRO (PRO comes LAST)
+                if (order === 'con-first') {
+                    // Correct! CON first, PRO last
                     isCorrect = true;
-                    message = `✅ Perfect! CON after "${connective.toLowerCase()}", then PRO last to emphasise it!`;
-                } else if (isHoweverType && order === 'pro-first') {
-                    message = `⚠️ With "${connective.toLowerCase()}", this emphasises the CON, not the PRO. Try "although/though" instead.`;
+                    message = `✅ Perfect! CON first, then PRO last to emphasise it!`;
                 } else {
-                    message = '❌ Not quite right. To emphasise the PRO (since you prefer it), put PRO LAST.';
+                    // Wrong - PRO first, CON last
+                    message = '❌ Not quite right. To emphasise the PRO (since you prefer it), put PRO LAST. Try "CON first"!';
                 }
             } else {
-                // Should emphasise CON (CON comes last)
-                if (isHoweverType && order === 'pro-first') {
+                // stance is 'not-preferable'
+                // Should emphasise CON (CON comes LAST)
+                if (order === 'pro-first') {
+                    // Correct! PRO first, CON last
                     isCorrect = true;
-                    message = `✅ Excellent! PRO first, then CON after "${connective.toLowerCase()}" to emphasise it!`;
-                } else if (isAlthoughType && order === 'pro-first') {
-                    isCorrect = true;
-                    message = `✅ Good! PRO after "${connective.toLowerCase()}", then CON last to emphasise it!`;
+                    message = `✅ Excellent! PRO first, then CON last to emphasise it!`;
                 } else {
-                    message = '❌ Not quite right. To emphasise the CON (since you don\'t prefer it), put CON LAST.';
+                    // Wrong - CON first, PRO last
+                    message = '❌ Not quite right. To emphasise the CON (since you don\'t prefer it), put CON LAST. Try "PRO first"!';
                 }
             }
             
@@ -2794,13 +2929,24 @@
                     paragraphHTML += `<div class="template-line">${connective} ${conSentence},</div>`;
                     paragraphHTML += `<div class="template-line">${proSentence}.</div>`;
                 }
-            } else {
+            } else if (connective === 'However') {
+                const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+                const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
                 if (order === 'pro-first') {
                     paragraphHTML += `<div class="template-line">${proSentence}.</div>`;
-                    paragraphHTML += `<div class="template-line">${connective}, ${conSentence}.</div>`;
+                    paragraphHTML += `<div class="template-line">However, ${lowerCon}.</div>`;
                 } else {
                     paragraphHTML += `<div class="template-line">${conSentence}.</div>`;
-                    paragraphHTML += `<div class="template-line">${connective}, ${proSentence}.</div>`;
+                    paragraphHTML += `<div class="template-line">However, ${lowerPro}.</div>`;
+                }
+            } else {
+                // But
+                const lowerPro = proSentence.charAt(0).toLowerCase() + proSentence.slice(1);
+                const lowerCon = conSentence.charAt(0).toLowerCase() + conSentence.slice(1);
+                if (order === 'pro-first') {
+                    paragraphHTML += `<div class="template-line">${lowerPro}, but ${lowerCon}.</div>`;
+                } else {
+                    paragraphHTML += `<div class="template-line">${lowerCon}, but ${lowerPro}.</div>`;
                 }
             }
             
